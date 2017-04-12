@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		141494671E86897800769C02 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141494661E86897800769C02 /* Utils.swift */; };
+		141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */; };
+		142288D51E8FABDC00AEB097 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 142288D41E8FABDC00AEB097 /* SWRevealViewController.m */; };
+		142288D71E8FB09B00AEB097 /* CustomNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142288D61E8FB09B00AEB097 /* CustomNavViewController.swift */; };
+		142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */; };
+		14368FBE1E90238100E48027 /* AXRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14368FBD1E90238100E48027 /* AXRatingView.m */; };
+		14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FBF1E90DA3400E48027 /* AbstractViewController.swift */; };
+		14368FC41E90DB2400E48027 /* AnimeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FC21E90DB2400E48027 /* AnimeHeaderTableViewCell.swift */; };
+		14368FC51E90DB2400E48027 /* AnimeHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14368FC31E90DB2400E48027 /* AnimeHeaderTableViewCell.xib */; };
+		14368FC91E90EA6500E48027 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FC81E90EA6500E48027 /* DescriptionTableViewCell.swift */; };
+		14368FCC1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FCA1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift */; };
+		144F1FA61E867A160009260E /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F1FA51E867A160009260E /* Anime.swift */; };
+		144F1FA81E8686B60009260E /* AnimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F1FA71E8686B60009260E /* AnimeCollectionViewCell.swift */; };
+		1477B1791E901E9A007B4620 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1477B1781E901E9A007B4620 /* RatingView.swift */; };
+		148812B11E86409300B580BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148812B01E86409300B580BC /* AppDelegate.swift */; };
+		148812B61E86409300B580BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148812B41E86409300B580BC /* Main.storyboard */; };
+		148812B81E86409300B580BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 148812B71E86409300B580BC /* Assets.xcassets */; };
+		148812BB1E86409300B580BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148812B91E86409300B580BC /* LaunchScreen.storyboard */; };
+		148812C31E8640C700B580BC /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148812C21E8640C700B580BC /* NewsViewController.swift */; };
+		14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */; };
+		14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */; };
+		14E904C41E8641860009C777 /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine.swift */; };
+		14E904C91E8644B40009C777 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C81E8644B40009C777 /* Constants.swift */; };
+		CE578B7716C9CAF47A086AC4 /* Pods_Shikimori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		141494661E86897800769C02 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarAnimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		142288D31E8FABDC00AEB097 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		142288D41E8FABDC00AEB097 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		142288D61E8FB09B00AEB097 /* CustomNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavViewController.swift; sourceTree = "<group>"; };
+		142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimePreviewViewController.swift; sourceTree = "<group>"; };
+		14368FBC1E90238100E48027 /* AXRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXRatingView.h; sourceTree = "<group>"; };
+		14368FBD1E90238100E48027 /* AXRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXRatingView.m; sourceTree = "<group>"; };
+		14368FBF1E90DA3400E48027 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
+		14368FC21E90DB2400E48027 /* AnimeHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		14368FC31E90DB2400E48027 /* AnimeHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimeHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		14368FC81E90EA6500E48027 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		14368FCA1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSimilarTableViewCell.swift; sourceTree = "<group>"; };
+		144F1FA51E867A160009260E /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
+		144F1FA71E8686B60009260E /* AnimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		1477B1781E901E9A007B4620 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		148812AD1E86409300B580BC /* Shikimori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shikimori.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		148812B01E86409300B580BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		148812B51E86409300B580BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		148812B71E86409300B580BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		148812BA1E86409300B580BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		148812BC1E86409300B580BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		148812C21E8640C700B580BC /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
+		14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
+		14E904C31E8641860009C777 /* RequestEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine.swift; sourceTree = "<group>"; };
+		14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shikimori-Bridging-Header.h"; sourceTree = "<group>"; };
+		14E904C81E8644B40009C777 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shikimori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC0834D5897DEA7DE377A74A /* Pods-Shikimori.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shikimori.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori.debug.xcconfig"; sourceTree = "<group>"; };
+		F5D16124CB2AA33AEA0FAE94 /* Pods-Shikimori.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shikimori.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		148812AA1E86409200B580BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE578B7716C9CAF47A086AC4 /* Pods_Shikimori.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		141B50471E98CBD000CCB346 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */,
+				144F1FA71E8686B60009260E /* AnimeCollectionViewCell.swift */,
+				141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */,
+			);
+			name = Collection;
+			sourceTree = "<group>";
+		};
+		141B50481E98CBDB00CCB346 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				14368FC81E90EA6500E48027 /* DescriptionTableViewCell.swift */,
+				14368FCA1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift */,
+				14368FC61E90DB2800E48027 /* AnimeHeader */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		142288D21E8FABDC00AEB097 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				142288D31E8FABDC00AEB097 /* SWRevealViewController.h */,
+				142288D41E8FABDC00AEB097 /* SWRevealViewController.m */,
+			);
+			path = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		14368FBB1E90238100E48027 /* AXRatingView */ = {
+			isa = PBXGroup;
+			children = (
+				14368FBC1E90238100E48027 /* AXRatingView.h */,
+				14368FBD1E90238100E48027 /* AXRatingView.m */,
+			);
+			path = AXRatingView;
+			sourceTree = "<group>";
+		};
+		14368FC11E90DA3900E48027 /* Abstract controllers */ = {
+			isa = PBXGroup;
+			children = (
+				142288D61E8FB09B00AEB097 /* CustomNavViewController.swift */,
+				14368FBF1E90DA3400E48027 /* AbstractViewController.swift */,
+			);
+			name = "Abstract controllers";
+			sourceTree = "<group>";
+		};
+		14368FC61E90DB2800E48027 /* AnimeHeader */ = {
+			isa = PBXGroup;
+			children = (
+				14368FC21E90DB2400E48027 /* AnimeHeaderTableViewCell.swift */,
+				14368FC31E90DB2400E48027 /* AnimeHeaderTableViewCell.xib */,
+			);
+			name = AnimeHeader;
+			sourceTree = "<group>";
+		};
+		144F1FA91E8686BD0009260E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				141B50471E98CBD000CCB346 /* Collection */,
+				141B50481E98CBDB00CCB346 /* Table */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		148812A41E86409200B580BC = {
+			isa = PBXGroup;
+			children = (
+				148812AF1E86409300B580BC /* Shikimori */,
+				148812AE1E86409300B580BC /* Products */,
+				628C5D9A82B6BEAE22032326 /* Pods */,
+				A60E67AB1561761CFAF09780 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		148812AE1E86409300B580BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				148812AD1E86409300B580BC /* Shikimori.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		148812AF1E86409300B580BC /* Shikimori */ = {
+			isa = PBXGroup;
+			children = (
+				14E904C51E86418C0009C777 /* Model */,
+				144F1FA91E8686BD0009260E /* View */,
+				14E904C61E8641990009C777 /* Controller */,
+				14E904C21E86416A0009C777 /* Supporting files */,
+			);
+			path = Shikimori;
+			sourceTree = "<group>";
+		};
+		14E904C21E86416A0009C777 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				148812B01E86409300B580BC /* AppDelegate.swift */,
+				148812B41E86409300B580BC /* Main.storyboard */,
+				148812B71E86409300B580BC /* Assets.xcassets */,
+				148812B91E86409300B580BC /* LaunchScreen.storyboard */,
+				148812BC1E86409300B580BC /* Info.plist */,
+				14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */,
+				1477B1781E901E9A007B4620 /* RatingView.swift */,
+				14368FBB1E90238100E48027 /* AXRatingView */,
+				142288D21E8FABDC00AEB097 /* SWRevealViewController */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		14E904C51E86418C0009C777 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				14E904C31E8641860009C777 /* RequestEngine.swift */,
+				144F1FA51E867A160009260E /* Anime.swift */,
+				14E904C81E8644B40009C777 /* Constants.swift */,
+				141494661E86897800769C02 /* Utils.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		14E904C61E8641990009C777 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				14368FC11E90DA3900E48027 /* Abstract controllers */,
+				148812C21E8640C700B580BC /* NewsViewController.swift */,
+				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
+				142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		628C5D9A82B6BEAE22032326 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC0834D5897DEA7DE377A74A /* Pods-Shikimori.debug.xcconfig */,
+				F5D16124CB2AA33AEA0FAE94 /* Pods-Shikimori.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A60E67AB1561761CFAF09780 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		148812AC1E86409200B580BC /* Shikimori */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 148812BF1E86409300B580BC /* Build configuration list for PBXNativeTarget "Shikimori" */;
+			buildPhases = (
+				0B87A95F17EB378BA44BCABA /* [CP] Check Pods Manifest.lock */,
+				148812A91E86409200B580BC /* Sources */,
+				148812AA1E86409200B580BC /* Frameworks */,
+				148812AB1E86409200B580BC /* Resources */,
+				FE1A89B1540C8DB0E834B8B2 /* [CP] Embed Pods Frameworks */,
+				5A53C5EAC9A4416F42D2184E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Shikimori;
+			productName = Shikimori;
+			productReference = 148812AD1E86409300B580BC /* Shikimori.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		148812A51E86409200B580BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Temirlan;
+				TargetAttributes = {
+					148812AC1E86409200B580BC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = S9TF7DAU5J;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 148812A81E86409200B580BC /* Build configuration list for PBXProject "Shikimori" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 148812A41E86409200B580BC;
+			productRefGroup = 148812AE1E86409300B580BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				148812AC1E86409200B580BC /* Shikimori */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		148812AB1E86409200B580BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				148812BB1E86409300B580BC /* LaunchScreen.storyboard in Resources */,
+				148812B81E86409300B580BC /* Assets.xcassets in Resources */,
+				148812B61E86409300B580BC /* Main.storyboard in Resources */,
+				14368FC51E90DB2400E48027 /* AnimeHeaderTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B87A95F17EB378BA44BCABA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5A53C5EAC9A4416F42D2184E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE1A89B1540C8DB0E834B8B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		148812A91E86409200B580BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				142288D71E8FB09B00AEB097 /* CustomNavViewController.swift in Sources */,
+				148812B11E86409300B580BC /* AppDelegate.swift in Sources */,
+				1477B1791E901E9A007B4620 /* RatingView.swift in Sources */,
+				142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */,
+				14368FC91E90EA6500E48027 /* DescriptionTableViewCell.swift in Sources */,
+				141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */,
+				144F1FA61E867A160009260E /* Anime.swift in Sources */,
+				14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */,
+				148812C31E8640C700B580BC /* NewsViewController.swift in Sources */,
+				14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */,
+				142288D51E8FABDC00AEB097 /* SWRevealViewController.m in Sources */,
+				141494671E86897800769C02 /* Utils.swift in Sources */,
+				14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */,
+				14368FC41E90DB2400E48027 /* AnimeHeaderTableViewCell.swift in Sources */,
+				14368FBE1E90238100E48027 /* AXRatingView.m in Sources */,
+				14368FCC1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift in Sources */,
+				144F1FA81E8686B60009260E /* AnimeCollectionViewCell.swift in Sources */,
+				14E904C41E8641860009C777 /* RequestEngine.swift in Sources */,
+				14E904C91E8644B40009C777 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		148812B41E86409300B580BC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				148812B51E86409300B580BC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		148812B91E86409300B580BC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				148812BA1E86409300B580BC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		148812BD1E86409300B580BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shikimori/Shikimori-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		148812BE1E86409300B580BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shikimori/Shikimori-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		148812C01E86409300B580BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC0834D5897DEA7DE377A74A /* Pods-Shikimori.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S9TF7DAU5J;
+				INFOPLIST_FILE = Shikimori/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		148812C11E86409300B580BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5D16124CB2AA33AEA0FAE94 /* Pods-Shikimori.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S9TF7DAU5J;
+				INFOPLIST_FILE = Shikimori/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		148812A81E86409200B580BC /* Build configuration list for PBXProject "Shikimori" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				148812BD1E86409300B580BC /* Debug */,
+				148812BE1E86409300B580BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		148812BF1E86409300B580BC /* Build configuration list for PBXNativeTarget "Shikimori" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				148812C01E86409300B580BC /* Debug */,
+				148812C11E86409300B580BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 148812A51E86409200B580BC /* Project object */;
+}
