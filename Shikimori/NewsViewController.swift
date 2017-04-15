@@ -17,31 +17,38 @@ class NewsViewController: CustomNavViewController {
     var previewAnime: Anime?
     var page = 1
     var isSearchMode = false
+    var reachesEnd = false
+    var filter: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
-        getAnimeList(at: page)
+        getAnimeList(with: filter, at: page)
         setupLongGesture()
     }
     
-    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-    
-    func getAnimeList(at page: Int) {
-        RequestEngine.shared.getAnimes(at: page) { (animes, error) in
+    func getAnimeList(with filter: String?, at page: Int) {
+        RequestEngine.shared.getAnimes(with: filter, at: page) { (animes, error) in
             if let _ = animes, animes!.count > 0 {
                 self.animes.append(contentsOf: animes!)
-                self.collectionView.reloadData()
                 
                 if page == 1 {
                     self.setupFlowLayout()
                 }
                 
+                if animes!.count < 50 {
+                    self.reachesEnd = true
+                }
+                
                 self.page += 1
             }
+            
+            self.collectionView.reloadData()
         }
+    }
+    
+    @IBAction func filter(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "filterSegue", sender: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -55,48 +62,24 @@ class NewsViewController: CustomNavViewController {
     }
 }
 
+extension NewsViewController: FiltersDelegate {
+    
+    func filterUrlPostfix(url: String) {
+        if url != "" {
+            page = 1
+            filter = url
+            animes = [Anime]()
+            getAnimeList(with: filter, at: page)
+        }
+    }
+    
+}
+
 extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecognizerDelegate {
     
     func setupLongGesture() {
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
-        } else {
-            let gesture : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
-            gesture.minimumPressDuration = 0.6
-//            collectionView.addGestureRecognizer(gesture)
-        }
-    }
-    
-    func handleLongPress(gesture : UILongPressGestureRecognizer) {
-        let p = gesture.location(in: collectionView)
-        let path = collectionView.indexPathForItem(at: p)
-        
-        if animes.count > 0 {
-            if let _ = path {
-                let anime = animes[path!.row]
-                
-                let vc = storyboard?.instantiateViewController(withIdentifier: "AnimePreviewViewController") as! AnimePreviewViewController
-                vc.anime = anime
-                
-                let w = view.frame.size.width * 0.85
-                let h = view.frame.size.height * 0.85
-                let dimView = UIView(frame: CGRect(x: view.frame.size.width/2 - w/2, y: view.frame.size.height/2 - h/2, width: w, height: h))
-                dimView.tag = 32
-                
-                vc.view.frame = CGRect(x: dimView.frame.origin.x, y: dimView.frame.origin.y, width: w, height: h)
-                
-                if gesture.state == .began {
-                    dimView.addSubview(vc.view)
-                    view.addSubview(dimView)
-                } else if gesture.state == .ended {
-                    for v in view.subviews {
-                        if v.tag == 32 {
-                            v.removeFromSuperview()
-                        }
-                    }
-                }
-
-            }
         }
     }
     
@@ -162,8 +145,8 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
             let lastElement = animes.count - 1
             
             if indexPath.row == lastElement {
-                if !isSearchMode {
-                    getAnimeList(at: page)
+                if !isSearchMode, !reachesEnd {
+                    getAnimeList(with: filter, at: page)
                 }
             }
         }
@@ -201,6 +184,9 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else if segue.identifier == "animeDetails" {
             let vc = segue.destination as! AnimeDetailsViewController
             vc.anime = sender as? Anime
+        } else if segue.identifier == "filterSegue" {
+            let vc = segue.destination as! FilterViewController
+            vc.delegate = self
         }
     }
     
@@ -220,6 +206,7 @@ extension NewsViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         isSearchMode = true
+        searchBar.showsCancelButton = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -227,20 +214,30 @@ extension NewsViewController: UISearchBarDelegate {
             animes = [Anime]()
             isSearchMode = false
             page = 1
-            getAnimeList(at: page)
+            getAnimeList(with: nil, at: page)
+            searchBar.showsCancelButton = false
         }
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        view.endEditing(true)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        RequestEngine.shared.searchAnimes(by: searchBar.text!) { (animes, error) in
-            if let _ = error {
-                print(error!)
-            } else {
-                if let _ = animes {
-                    self.animes = animes!
-                    self.collectionView.reloadData()
+        if !searchBar.text!.isCyrillic {
+            RequestEngine.shared.searchAnimes(by: searchBar.text!) { (animes, error) in
+                if let _ = error {
+                    print(error!)
+                } else {
+                    if let _ = animes {
+                        self.animes = animes!
+                        self.collectionView.reloadData()
+                    }
                 }
             }
+        } else {
+            print("Поиск производится по английскому названию")
         }
     }
     

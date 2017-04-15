@@ -17,7 +17,7 @@ class AbstractViewController: UIViewController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
-    @IBAction func goBack(_ sender: Any) {
+    @IBAction func goBack(_ sender: UIBarButtonItem) {
         navigationController!.popViewController(animated: true)
     }
 

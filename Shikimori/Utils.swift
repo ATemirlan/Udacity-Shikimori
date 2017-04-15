@@ -43,6 +43,19 @@ extension String {
         return str
     }
     
+    var isCyrillic: Bool {
+        let upper = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯ"
+        let lower = "абвгдежзийклмнопрстуфхцчшщьюя"
+        
+        for c in self.characters.map({ String($0) }) {
+            if !upper.contains(c) && !lower.contains(c) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     var animeType: String {
         switch self {
         case "tv":
@@ -53,6 +66,27 @@ extension String {
             return "OVA"
         case "ona":
             return "ONA"
+        case "special":
+            return "Спешл"
+        case "music":
+            return "Клип"
+        default:
+            return ""
+        }
+    }
+    
+    var orderBy: String {
+        switch self {
+        case "ranked":
+            return "Оценке"
+        case "type":
+            return "Типу"
+        case "popularity":
+            return "Популярности"
+        case "name":
+            return "Названию"
+        case "status":
+            return "Статусу"
         default:
             return ""
         }
@@ -60,10 +94,12 @@ extension String {
     
     var animeStatus: String {
         switch self {
+        case "anons":
+            return "Анонсировано"
         case "ongoing":
-            return "онгоинг"
+            return "Онгоинг"
         case "released":
-            return "вышло"
+            return "Вышло"
         default:
             return ""
         }

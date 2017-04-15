@@ -16,15 +16,38 @@ class RequestEngine: NSObject {
     static let shared = RequestEngine()
     private override init() {}
     
-    func searchAnimes(by title: String, completion : @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
+    func getGenres(completion: @escaping (_ genres: [Genre]?, _ error: String?) -> Void) {
+        addProgressHud()
+        let url = urls.genres
+        
+        AFHTTPSessionManager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+            var genres = [Genre]()
+            
+            if let genreArray = response as? [[String : Any]] {
+                for genreInfo in genreArray {
+                    if let genre = Genre(with: genreInfo) {
+                        genres.append(genre)
+                    }
+                }
+            }
+            
+            completion(genres, nil)
+            self.removeProgressHud()
+        }) { (dataTask, err) in
+            completion(nil, nil)
+            self.removeProgressHud()
+        }
+    }
+    
+    func searchAnimes(by title: String, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
         let url = urls.animes.replacingOccurrences(of: "{page}", with: "1") + "&search=" + title
         retrieveAnimeList(url) { (animes, err) in
             completion(animes, err)
         }
     }
     
-    func getAnimes(at page: Int, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
-        let url = urls.animes.replacingOccurrences(of: "{page}", with: "\(page)")
+    func getAnimes(with filter: String?, at page: Int, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
+        let url = urls.animes.replacingOccurrences(of: "{page}", with: "\(page)") + (filter ?? "")
         retrieveAnimeList(url) { (animes, err) in
             completion(animes, err)
         }

@@ -13,8 +13,9 @@ struct Constants {
     struct WebMethods {
         static let baseURL = "https://shikimori.org/"
         static let topics = WebMethods.baseURL + "api/topics?forum={forum}&limit={limit}&page={page}"
-        static let animes = WebMethods.baseURL + "api/animes?censored=true&limit=50&page={page}&order=ranked"
+        static let animes = WebMethods.baseURL + "api/animes?censored=true&limit=50&page={page}"
         static let anime = WebMethods.baseURL + "api/animes/{id}"
+        static let genres = WebMethods.baseURL + "api/genres"
     }
     
     struct Forum {
@@ -37,5 +38,6 @@ struct Constants {
     
     struct SystemColor {
         static let navBarColor = UIColor.init(red: 52.0 / 255.0, green: 52.0 / 255.0, blue: 52.0 / 255.0, alpha: 1.0)
+        static let blue = UIColor.init(red: 29.0 / 255.0, green: 110.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
     }
 }

@@ -26,10 +26,14 @@
 		148812B81E86409300B580BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 148812B71E86409300B580BC /* Assets.xcassets */; };
 		148812BB1E86409300B580BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148812B91E86409300B580BC /* LaunchScreen.storyboard */; };
 		148812C31E8640C700B580BC /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148812C21E8640C700B580BC /* NewsViewController.swift */; };
+		14AA83D31EA202EA0025A277 /* RateFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA83D21EA202EA0025A277 /* RateFilterTableViewCell.swift */; };
+		14AA83D51EA207DD0025A277 /* RatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA83D41EA207DD0025A277 /* RatingButton.swift */; };
+		14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6A2691EA1E4010070A4FD /* FilterViewController.swift */; };
 		14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */; };
 		14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */; };
 		14E904C41E8641860009C777 /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine.swift */; };
 		14E904C91E8644B40009C777 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C81E8644B40009C777 /* Constants.swift */; };
+		14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F1B91F1EA1F95300D9E8FE /* Genre.swift */; };
 		CE578B7716C9CAF47A086AC4 /* Pods_Shikimori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,11 +61,15 @@
 		148812BA1E86409300B580BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		148812BC1E86409300B580BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		148812C21E8640C700B580BC /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		14AA83D21EA202EA0025A277 /* RateFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateFilterTableViewCell.swift; sourceTree = "<group>"; };
+		14AA83D41EA207DD0025A277 /* RatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingButton.swift; sourceTree = "<group>"; };
+		14B6A2691EA1E4010070A4FD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
 		14E904C31E8641860009C777 /* RequestEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine.swift; sourceTree = "<group>"; };
 		14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shikimori-Bridging-Header.h"; sourceTree = "<group>"; };
 		14E904C81E8644B40009C777 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		14F1B91F1EA1F95300D9E8FE /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shikimori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC0834D5897DEA7DE377A74A /* Pods-Shikimori.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shikimori.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori.debug.xcconfig"; sourceTree = "<group>"; };
 		F5D16124CB2AA33AEA0FAE94 /* Pods-Shikimori.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shikimori.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +102,7 @@
 			children = (
 				14368FC81E90EA6500E48027 /* DescriptionTableViewCell.swift */,
 				14368FCA1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift */,
+				14AA83D21EA202EA0025A277 /* RateFilterTableViewCell.swift */,
 				14368FC61E90DB2800E48027 /* AnimeHeader */,
 			);
 			name = Table;
@@ -138,6 +147,7 @@
 		144F1FA91E8686BD0009260E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				14AA83D41EA207DD0025A277 /* RatingButton.swift */,
 				141B50471E98CBD000CCB346 /* Collection */,
 				141B50481E98CBDB00CCB346 /* Table */,
 			);
@@ -193,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				14E904C31E8641860009C777 /* RequestEngine.swift */,
+				14F1B91F1EA1F95300D9E8FE /* Genre.swift */,
 				144F1FA51E867A160009260E /* Anime.swift */,
 				14E904C81E8644B40009C777 /* Constants.swift */,
 				141494661E86897800769C02 /* Utils.swift */,
@@ -207,6 +218,7 @@
 				148812C21E8640C700B580BC /* NewsViewController.swift */,
 				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
 				142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */,
+				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -359,16 +371,20 @@
 				142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */,
 				14368FC91E90EA6500E48027 /* DescriptionTableViewCell.swift in Sources */,
 				141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */,
+				14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */,
 				144F1FA61E867A160009260E /* Anime.swift in Sources */,
 				14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */,
 				148812C31E8640C700B580BC /* NewsViewController.swift in Sources */,
 				14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */,
 				142288D51E8FABDC00AEB097 /* SWRevealViewController.m in Sources */,
 				141494671E86897800769C02 /* Utils.swift in Sources */,
+				14AA83D31EA202EA0025A277 /* RateFilterTableViewCell.swift in Sources */,
 				14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */,
 				14368FC41E90DB2400E48027 /* AnimeHeaderTableViewCell.swift in Sources */,
+				14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */,
 				14368FBE1E90238100E48027 /* AXRatingView.m in Sources */,
 				14368FCC1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift in Sources */,
+				14AA83D51EA207DD0025A277 /* RatingButton.swift in Sources */,
 				144F1FA81E8686B60009260E /* AnimeCollectionViewCell.swift in Sources */,
 				14E904C41E8641860009C777 /* RequestEngine.swift in Sources */,
 				14E904C91E8644B40009C777 /* Constants.swift in Sources */,
