@@ -16,11 +16,72 @@ class RequestEngine: NSObject {
     static let shared = RequestEngine()
     private override init() {}
     
+    func login(nickname: String, password: String, completion: @escaping (_ code: Int) -> Void) {
+        addProgressHud()
+        let url = urls.login
+        
+        let params = [
+            "nickname" : nickname,
+            "password" : password
+        ]
+        
+        AFHTTPSessionManager().post(url, parameters: params, progress: nil, success: { (dataTask, response) in
+            
+            if let info = response as? [String : String] {
+                User.current.nickname = nickname
+                User.current.token = info["api_access_token"]
+            }
+            
+            self.removeProgressHud()
+            completion(self.getCode(from: dataTask))
+        }) { (dataTask, err) in
+            self.removeProgressHud()
+            completion(self.getCode(from: dataTask))
+        }
+    }
+    
+    func whoami(completion: @escaping (_ profile: Profile?) -> Void) {
+        let url = urls.whoami
+        
+        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+            var profile: Profile? = nil
+            
+            if let info = response as? [String : Any] {
+                profile = Profile(with: info)
+            }
+            
+            completion(profile)
+        }) { (dataTask, err) in
+            completion(nil)
+        }
+    }
+    
+    func getProfile(by id: String, completion: @escaping (_ profile: Profile?, _ error: String?) -> Void) {
+        addProgressHud()
+        let url = urls.user.replacingOccurrences(of: "{userId}", with: id)
+        
+        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+            var prof: Profile? = nil
+            
+            if let info = response as? [String : Any] {
+                if let obj = Profile(with: info) {
+                    prof = obj
+                }
+            }
+            
+            self.removeProgressHud()
+            completion(prof, nil)
+        }) { (dataTask, err) in
+            self.removeProgressHud()
+            completion(nil, nil)
+        }
+    }
+    
     func getGenres(completion: @escaping (_ genres: [Genre]?, _ error: String?) -> Void) {
         addProgressHud()
         let url = urls.genres
         
-        AFHTTPSessionManager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
             var genres = [Genre]()
             
             if let genreArray = response as? [[String : Any]] {
@@ -46,6 +107,14 @@ class RequestEngine: NSObject {
         }
     }
     
+    func getMyListAnimes(with listType: String, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
+        let url = urls.myListAnimes.replacingOccurrences(of: "{mylist}", with: listType)
+        retrieveAnimeList(url) { (animes, err) in
+            completion(animes, err)
+        }
+    }
+
+    
     func getAnimes(with filter: String?, at page: Int, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
         let url = urls.animes.replacingOccurrences(of: "{page}", with: "\(page)") + (filter ?? "")
         retrieveAnimeList(url) { (animes, err) in
@@ -56,7 +125,7 @@ class RequestEngine: NSObject {
     func retrieveAnimeList(_ url: String, _ completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
         addProgressHud()
         
-        AFHTTPSessionManager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
             var animes = [Anime]()
             
             if let animeArr = response as? [[String : Any]] {
@@ -82,7 +151,7 @@ class RequestEngine: NSObject {
             addProgressHud()
         }
         
-        AFHTTPSessionManager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
             var anime: Anime? = nil
 
             if let animeArr = response as? [String : Any] {
@@ -101,7 +170,7 @@ class RequestEngine: NSObject {
         let url = urls.anime.replacingOccurrences(of: "{id}", with: String(animeId)).appending("/similar")
         addProgressHud()
         
-        AFHTTPSessionManager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
             var similars = [Anime]()
             
             if let result = response as? [[String : Any]] {
@@ -123,7 +192,7 @@ class RequestEngine: NSObject {
     func loadPhoto(with url: URL, completion: @escaping(_ path: URL?, _ error: String?) -> Void) {
         let request = URLRequest(url: url)
         
-        AFHTTPSessionManager().downloadTask(with: request, progress: nil, destination: { (path, response) -> URL in
+        manager().downloadTask(with: request, progress: nil, destination: { (path, response) -> URL in
             return path
         }) { (response, path, error) in
             completion(nil, "error")
@@ -134,12 +203,22 @@ class RequestEngine: NSObject {
 
 private extension RequestEngine {
     
+    func manager() -> AFHTTPSessionManager {
+        let manager = AFHTTPSessionManager()
+        
+        if let nickname = User.current.nickname, let token = User.current.token {
+            manager.requestSerializer.setValue(nickname, forHTTPHeaderField: "X-User-Nickname")
+            manager.requestSerializer.setValue(token, forHTTPHeaderField: "X-User-Api-Access-Token")
+        }
+        
+        return manager
+    }
+    
     func getCode(from dataTask: URLSessionDataTask?) -> Int {
         return (dataTask?.response as? HTTPURLResponse)?.statusCode ?? 0
     }
     
     func getErrorString(error: Error) -> String? {
-
         return nil
     }
         

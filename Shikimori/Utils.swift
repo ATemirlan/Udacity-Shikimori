@@ -10,9 +10,11 @@ import UIKit
 
 class Utils: NSObject {
     
-    func pureString(str: String) -> String {
-
-        return str
+    func popViewControllerAnimated(navController: UINavigationController, completion: @escaping () -> Void) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        navController.popViewController(animated: true)
+        CATransaction.commit()
     }
     
 }

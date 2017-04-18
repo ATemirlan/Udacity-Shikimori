@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Anime-44.png",
+      "filename" : "logout.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Anime-45.png",
+      "filename" : "logout-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Anime-66.png",
+      "filename" : "Export-66.png",
       "scale" : "3x"
     }
   ],

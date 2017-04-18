@@ -47,7 +47,7 @@ class FilterViewController: AbstractViewController {
         var finalUrl = ""
         
         if selectedGenres.count > 0 {
-            var genreUrl = "&genres="
+            var genreUrl = "&genre="
             
             for genre in selectedGenres {
                 genreUrl += "\(genre.id!),"
@@ -74,18 +74,13 @@ class FilterViewController: AbstractViewController {
         if currRate != 0 {
             finalUrl += "&score=\(currRate)"
         }
-        
-        popViewControllerAnimated {
+
+        Utils().popViewControllerAnimated(navController: navigationController!, completion: { 
             self.delegate?.filterUrlPostfix(url: finalUrl)
-        }
+        })
+
     }
     
-    func popViewControllerAnimated(completion: @escaping () -> Void) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock(completion)
-        navigationController!.popViewController(animated: true)
-        CATransaction.commit()
-    }
 }
 
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource {

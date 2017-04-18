@@ -16,8 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         setupNavBar()
+        checkWhoAmI()
         
         return true
+    }
+    
+    func checkWhoAmI() {
+        RequestEngine.shared.whoami { (profile) in
+            if let _ = profile {
+                User.current.id = "\(profile!.id!)"
+                User.current.nickname = profile!.nickname!
+                User.current.avatarUrl = "\(profile!.avatarUrl!)"
+            }
+        }
     }
     
     func setupNavBar() {

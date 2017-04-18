@@ -16,6 +16,18 @@ struct Constants {
         static let animes = WebMethods.baseURL + "api/animes?censored=true&limit=50&page={page}"
         static let anime = WebMethods.baseURL + "api/animes/{id}"
         static let genres = WebMethods.baseURL + "api/genres"
+        static let login = WebMethods.baseURL + "api/access_token"
+        static let whoami = WebMethods.baseURL + "api/users/whoami"
+        static let user = WebMethods.baseURL + "api/users/{userId}"
+        static let myListAnimes = WebMethods.baseURL + "api/animes?censored=true&limit=11&page=1&order=random&mylist={mylist}"
+    }
+    
+    struct MyList {
+        static let planned = "planned"
+        static let watching = "watching"
+        static let completed = "completed"
+        static let on_hold = "on_hold"
+        static let dropped = "dropped"
     }
     
     struct Forum {
