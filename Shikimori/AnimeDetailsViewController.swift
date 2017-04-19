@@ -96,7 +96,7 @@ extension AnimeDetailsViewController: UITableViewDataSource, UITableViewDelegate
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AnimeSimilar") as! AnimeSimilarTableViewCell
             
-            cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+            cell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
             
             return cell
         }

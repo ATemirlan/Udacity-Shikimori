@@ -12,10 +12,11 @@ class ProfileViewController: CustomNavViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    private let list = Constants.MyList.self
+    let list = Constants.MyList.self
+    var storedOffsets = [Int: CGFloat]()
     var profile: Profile?
     
-    let sectionHeaders = ["Запланировано", "Смотрю", "Просмотрено", "Отложено", "Брошено"]
+    let sectionHeaders = ["Запланировано", "Смотрю", "Просмотрено", "Брошено", "Отложено"]
     var completedAnimes = [Anime]()
     var droppedAnimes = [Anime]()
     var onholdAnimes = [Anime]()
@@ -31,6 +32,8 @@ class ProfileViewController: CustomNavViewController {
         getAnimes(with: list.on_hold)
         getAnimes(with: list.planned)
         getAnimes(with: list.watching)
+        
+        self.automaticallyAdjustsScrollViewInsets = false
     }
 
     func getAnimes(with type: String) {
@@ -55,6 +58,7 @@ class ProfileViewController: CustomNavViewController {
                     }
                 }
             }
+            
             self.tableView.reloadData()
         }
     }
@@ -76,9 +80,9 @@ class ProfileViewController: CustomNavViewController {
         case 3:
             type = list.completed
         case 4:
-            type = list.on_hold
-        case 5:
             type = list.dropped
+        case 5:
+            type = list.on_hold
         default:
             type = nil
         }
@@ -118,11 +122,20 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AnimeCell") as! AnimeSimilarTableViewCell
-
-            cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.section)
-            
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: "AnimeCell") as! AnimeSimilarTableViewCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let tableCell = cell as? AnimeSimilarTableViewCell {
+            tableCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)
+            tableCell.collectionViewOffset = storedOffsets[indexPath.section] ?? 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let tableCell = cell as? AnimeSimilarTableViewCell {
+            storedOffsets[indexPath.section] = tableCell.collectionViewOffset
         }
     }
     
@@ -131,18 +144,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case 0:
             return 120.0
         case 1...5:
-            if let list = chooseList(from: indexPath.section) {
-                return list.count > 0 ? 166.0 : CGFloat.leastNormalMagnitude
+            if let list = chooseList(from: indexPath.section), list.count > 0 {
+                return 166.0
             } else {
                 return CGFloat.leastNormalMagnitude
             }
         default:
             return CGFloat.leastNormalMagnitude
         }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? nil : sectionHeaders[section - 1]
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -153,12 +162,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             
             let titleLabel = UILabel(frame: CGRect(x: 8.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2 - 8.0, height: tableView.sectionHeaderHeight))
             titleLabel.font = UIFont.systemFont(ofSize: 14.0)
-            titleLabel.text = sectionHeaders[section - 1]
+            titleLabel.text = sectionHeaders[section - 1] + " " + properNumber(listType: section, profile: profile!)
             titleLabel.textColor = .black
             
             let but = UIButton(frame: CGRect(x: view.frame.size.width / 2, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2 - 8.0, height: tableView.sectionHeaderHeight))
             but.addTarget(self, action: #selector(showAll), for: .touchUpInside)
-            but.setTitle("Весь список", for: .normal)
+            but.setTitle("Просмотреть все ❭", for: .normal)
             but.setTitleColor(Constants.SystemColor.blue, for: .normal)
             but.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
             but.contentHorizontalAlignment = .right
@@ -197,37 +206,59 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         if let list = chooseList(from: collectionView.tag) {
             return list.count
         }
+        
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SimilarAnimeCollectionViewCell
-
         setup(cell: cell, at: IndexPath(row: indexPath.row, section: collectionView.tag))
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let anime = completedAnimes[indexPath.row]
-        
-        RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
-            if let _ = anim {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as! AnimeDetailsViewController
-                vc.anime = anim
-                self.navigationController?.show(vc, sender: nil)
-            }
-        })
-        
+        if let list = chooseList(from: collectionView.tag) {
+            let anime = list[indexPath.row]
+            
+            RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
+                if let _ = anim {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as! AnimeDetailsViewController
+                    vc.anime = anim
+                    self.navigationController?.show(vc, sender: nil)
+                } else {
+                    if let _ = error {
+                        
+                    }
+                }
+            })
+        }
+    }
+    
+    func properNumber(listType: Int, profile: Profile) -> String {
+        switch listType {
+        case 1:
+            return "(\(profile.planned ?? 0))"
+        case 2:
+            return "(\(profile.watching ?? 0))"
+        case 3:
+            return "(\(profile.completed ?? 0))"
+        case 4:
+            return "(\(profile.dropped ?? 0))"
+        case 5:
+            return "(\(profile.on_hold ?? 0))"
+        default:
+            return "(0)"
+        }
     }
     
     func setup(cell: SimilarAnimeCollectionViewCell, at indexPath: IndexPath) {
         if let animeList = chooseList(from: indexPath.section) {
             let anime = animeList[indexPath.row]
             cell.imageView.setImageWith(anime.imageUrl!, placeholderImage: UIImage(named:"placeholder"))
+        } else {
+            cell.imageView.image = UIImage(named:"placeholder")
         }
     }
     
@@ -240,13 +271,12 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         case 3:
             return completedAnimes
         case 4:
-            return onholdAnimes
-        case 5:
             return droppedAnimes
+        case 5:
+            return onholdAnimes
         default:
-            return nil
+            return [Anime]()
         }
     }
     
 }
-

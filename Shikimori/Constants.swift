@@ -19,7 +19,7 @@ struct Constants {
         static let login = WebMethods.baseURL + "api/access_token"
         static let whoami = WebMethods.baseURL + "api/users/whoami"
         static let user = WebMethods.baseURL + "api/users/{userId}"
-        static let myListAnimes = WebMethods.baseURL + "api/animes?censored=true&limit=11&page=1&order=random&mylist={mylist}"
+        static let myListAnimes = WebMethods.baseURL + "api/animes?censored=true&limit=10&page=1&order=random&mylist={mylist}"
     }
     
     struct MyList {
