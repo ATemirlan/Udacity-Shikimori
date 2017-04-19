@@ -35,6 +35,11 @@ class ProfileViewController: CustomNavViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        super.viewDidAppear(animated)
+    }
 
     func getAnimes(with type: String) {
         RequestEngine.shared.getMyListAnimes(with: type) { (animes, error) in
