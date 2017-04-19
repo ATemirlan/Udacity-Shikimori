@@ -8,35 +8,43 @@
 
 import UIKit
 import AFNetworking
+import ReachabilitySwift
 
 class RequestEngine: NSObject {
 
     fileprivate let urls = Constants.WebMethods.self
+    private let networkError = "Отсутствует интернет соединение"
     
     static let shared = RequestEngine()
     private override init() {}
     
-    func login(nickname: String, password: String, completion: @escaping (_ code: Int) -> Void) {
+    func login(nickname: String, password: String, completion: @escaping (_ code: Int, _ error: String?) -> Void) {
         addProgressHud()
-        let url = urls.login
         
-        let params = [
-            "nickname" : nickname,
-            "password" : password
-        ]
-        
-        AFHTTPSessionManager().post(url, parameters: params, progress: nil, success: { (dataTask, response) in
+        if isInternet() {
+            let url = urls.login
             
-            if let info = response as? [String : String] {
-                User.current.nickname = nickname
-                User.current.token = info["api_access_token"]
+            let params = [
+                "nickname" : nickname,
+                "password" : password
+            ]
+            
+            AFHTTPSessionManager().post(url, parameters: params, progress: nil, success: { (dataTask, response) in
+                
+                if let info = response as? [String : String] {
+                    User.current.nickname = nickname
+                    User.current.token = info["api_access_token"]
+                }
+                
+                self.removeProgressHud()
+                completion(self.getCode(from: dataTask), nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(self.getCode(from: dataTask), self.getCode(from: dataTask).errorCodeDescription())
             }
-            
-            self.removeProgressHud()
-            completion(self.getCode(from: dataTask))
-        }) { (dataTask, err) in
-            self.removeProgressHud()
-            completion(self.getCode(from: dataTask))
+        } else {
+            removeProgressHud()
+            completion(700, networkError)
         }
     }
     
@@ -58,45 +66,57 @@ class RequestEngine: NSObject {
     
     func getProfile(by id: String, completion: @escaping (_ profile: Profile?, _ error: String?) -> Void) {
         addProgressHud()
-        let url = urls.user.replacingOccurrences(of: "{userId}", with: id)
         
-        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-            var prof: Profile? = nil
+        if isInternet() {
+            let url = urls.user.replacingOccurrences(of: "{userId}", with: id)
             
-            if let info = response as? [String : Any] {
-                if let obj = Profile(with: info) {
-                    prof = obj
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                var prof: Profile? = nil
+                
+                if let info = response as? [String : Any] {
+                    if let obj = Profile(with: info) {
+                        prof = obj
+                    }
                 }
+                
+                self.removeProgressHud()
+                completion(prof, nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(nil, self.getCode(from: dataTask).errorCodeDescription())
             }
-            
-            self.removeProgressHud()
-            completion(prof, nil)
-        }) { (dataTask, err) in
-            self.removeProgressHud()
-            completion(nil, nil)
+        } else {
+            removeProgressHud()
+            completion(nil, networkError)
         }
     }
     
     func getGenres(completion: @escaping (_ genres: [Genre]?, _ error: String?) -> Void) {
         addProgressHud()
-        let url = urls.genres
         
-        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-            var genres = [Genre]()
+        if isInternet() {
+            let url = urls.genres
             
-            if let genreArray = response as? [[String : Any]] {
-                for genreInfo in genreArray {
-                    if let genre = Genre(with: genreInfo) {
-                        genres.append(genre)
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                var genres = [Genre]()
+                
+                if let genreArray = response as? [[String : Any]] {
+                    for genreInfo in genreArray {
+                        if let genre = Genre(with: genreInfo) {
+                            genres.append(genre)
+                        }
                     }
                 }
+                
+                completion(genres, nil)
+                self.removeProgressHud()
+            }) { (dataTask, err) in
+                completion(nil, self.getCode(from: dataTask).errorCodeDescription())
+                self.removeProgressHud()
             }
-            
-            completion(genres, nil)
-            self.removeProgressHud()
-        }) { (dataTask, err) in
-            completion(nil, nil)
-            self.removeProgressHud()
+        } else {
+            removeProgressHud()
+            completion(nil, networkError)
         }
     }
     
@@ -125,22 +145,27 @@ class RequestEngine: NSObject {
     func retrieveAnimeList(_ url: String, _ completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
         addProgressHud()
         
-        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-            var animes = [Anime]()
-            
-            if let animeArr = response as? [[String : Any]] {
-                for animeInfo in animeArr {
-                    if let anime = Anime(with: animeInfo) {
-                        animes.append(anime)
+        if isInternet() {
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                var animes = [Anime]()
+                
+                if let animeArr = response as? [[String : Any]] {
+                    for animeInfo in animeArr {
+                        if let anime = Anime(with: animeInfo) {
+                            animes.append(anime)
+                        }
                     }
                 }
+                
+                self.removeProgressHud()
+                completion(animes, nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(nil, self.getCode(from: dataTask).errorCodeDescription())
             }
-            
-            self.removeProgressHud()
-            completion(animes, nil)
-        }) { (dataTask, err) in
-            self.removeProgressHud()
-            completion(nil, nil)
+        } else {
+            removeProgressHud()
+            completion(nil, networkError)
         }
     }
     
@@ -151,18 +176,23 @@ class RequestEngine: NSObject {
             addProgressHud()
         }
         
-        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-            var anime: Anime? = nil
-
-            if let animeArr = response as? [String : Any] {
-                anime = Anime(with: animeArr)
+        if isInternet() {
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                var anime: Anime? = nil
+                
+                if let animeArr = response as? [String : Any] {
+                    anime = Anime(with: animeArr)
+                }
+                
+                self.removeProgressHud()
+                completion(anime, nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(nil, self.getCode(from: dataTask).errorCodeDescription())
             }
-            
-            self.removeProgressHud()
-            completion(anime, nil)
-        }) { (dataTask, err) in
-            self.removeProgressHud()
-            completion(nil, nil)
+        } else {
+            removeProgressHud()
+            completion(nil, networkError)
         }
     }
     
@@ -170,33 +200,28 @@ class RequestEngine: NSObject {
         let url = urls.anime.replacingOccurrences(of: "{id}", with: String(animeId)).appending("/similar")
         addProgressHud()
         
-        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-            var similars = [Anime]()
-            
-            if let result = response as? [[String : Any]] {
-                for animeInfo in result {
-                    if let anime = Anime(with: animeInfo) {
-                        similars.append(anime)
+        if isInternet() {
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                var similars = [Anime]()
+                
+                if let result = response as? [[String : Any]] {
+                    for animeInfo in result {
+                        if let anime = Anime(with: animeInfo) {
+                            similars.append(anime)
+                        }
                     }
                 }
+                
+                self.removeProgressHud()
+                completion(similars, nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(nil, self.getCode(from: dataTask).errorCodeDescription())
             }
-            
-            self.removeProgressHud()
-            completion(similars, nil)
-        }) { (dataTask, err) in
-            self.removeProgressHud()
-            completion(nil, nil)
+        } else {
+            removeProgressHud()
+            completion(nil, networkError)
         }
-    }
-    
-    func loadPhoto(with url: URL, completion: @escaping(_ path: URL?, _ error: String?) -> Void) {
-        let request = URLRequest(url: url)
-        
-        manager().downloadTask(with: request, progress: nil, destination: { (path, response) -> URL in
-            return path
-        }) { (response, path, error) in
-            completion(nil, "error")
-        }.resume()
     }
     
 }
@@ -214,12 +239,13 @@ private extension RequestEngine {
         return manager
     }
     
-    func getCode(from dataTask: URLSessionDataTask?) -> Int {
-        return (dataTask?.response as? HTTPURLResponse)?.statusCode ?? 0
+    func isInternet() -> Bool {
+        let reachability = Reachability()!
+        return reachability.currentReachabilityStatus != Reachability.NetworkStatus.notReachable
     }
     
-    func getErrorString(error: Error) -> String? {
-        return nil
+    func getCode(from dataTask: URLSessionDataTask?) -> Int {
+        return (dataTask?.response as? HTTPURLResponse)?.statusCode ?? 0
     }
         
     func addProgressHud() {

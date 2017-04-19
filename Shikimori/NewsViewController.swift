@@ -12,6 +12,8 @@ class NewsViewController: CustomNavViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var leftButton: UIBarButtonItem!
 
     var animes = [Anime]()
     var previewAnime: Anime?
@@ -20,11 +22,39 @@ class NewsViewController: CustomNavViewController {
     var reachesEnd = false
     var filter: String? = nil
     
+    var type: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
-        getAnimeList(with: filter, at: page)
+        setupView()
+    }
+    
+    func setupView() {
+        if let _ = type {
+            view.removeGestureRecognizer(revealViewController().panGestureRecognizer())
+            
+            navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+            
+            leftButton.image = UIImage(named: "back")
+            leftButton.target = self
+            leftButton.action = #selector(goBack)
+            
+            filterButton.image = nil
+            filterButton.isEnabled = false
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            filter = "&mylist=\(type!)"
+            getAnimeList(with: filter, at: page)
+        } else {
+            collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
+            getAnimeList(with: filter, at: page)
+        }
+        
         setupLongGesture()
+    }
+    
+    func goBack() {
+        self.navigationController!.popViewController(animated: true)
     }
     
     func getAnimeList(with filter: String?, at page: Int) {
@@ -167,14 +197,23 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if (kind == UICollectionElementKindSectionHeader) {
+        if kind == UICollectionElementKindSectionHeader {
             let headerView:UICollectionReusableView =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchBarView", for: indexPath)
             
             return headerView
         }
         
         return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        var sz = CGSize(width: view.frame.size.width, height: 50.0)
+        
+        if let _ = type {
+            sz = CGSize(width: view.frame.size.width, height: CGFloat.leastNormalMagnitude)
+        }
+
+        return sz
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
