@@ -64,6 +64,32 @@ class ProfileViewController: CustomNavViewController {
             User.current.deleteUser()
         }
     }
+    
+    func showAll(but: UIButton) {
+        var type: String? = nil
+        
+        switch but.tag {
+        case 1:
+            type = list.planned
+        case 2:
+            type = list.watching
+        case 3:
+            type = list.completed
+        case 4:
+            type = list.on_hold
+        case 5:
+            type = list.dropped
+        default:
+            type = nil
+        }
+        
+        if let _ = type {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MainCollectionViewController") as! NewsViewController
+            vc.type = type!
+            present(vc, animated: true, completion: nil)
+        }
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -112,6 +138,29 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? nil : sectionHeaders[section - 1]
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            return UIView()
+        } else {
+            let sectionView = UIView(frame: CGRect(x: 0.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width, height: tableView.sectionHeaderHeight))
+            
+            let titleLabel = UILabel(frame: CGRect(x: 0.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2, height: tableView.sectionHeaderHeight))
+            titleLabel.text = sectionHeaders[section - 1]
+            titleLabel.textColor = .black
+            
+            let but = UIButton(frame: CGRect(x: view.frame.size.width / 2, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2, height: tableView.sectionHeaderHeight))
+            but.addTarget(self, action: #selector(showAll), for: .touchUpInside)
+            but.setTitle(sectionHeaders[section - 1], for: .normal)
+            but.setTitleColor(.red, for: .normal)
+            but.tag = section
+            
+            sectionView.addSubview(titleLabel)
+            sectionView.addSubview(but)
+            
+            return sectionView
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

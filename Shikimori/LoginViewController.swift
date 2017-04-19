@@ -32,8 +32,10 @@ class LoginViewController: UIViewController {
             !placeholders.contains(loginField.text!),
             !placeholders.contains(passwordField.text!) {
             
-            RequestEngine.shared.login(nickname: loginField.text!, password: passwordField.text!, completion: { (code) in
-                if code == 200 {
+            RequestEngine.shared.login(nickname: loginField.text!, password: passwordField.text!, completion: { (code, error) in
+                if let _ = error {
+                    
+                } else if code == 200 {
                     RequestEngine.shared.whoami { (profile) in
                         if let _ = profile {
                             User.current.id = "\(profile!.id!)"
