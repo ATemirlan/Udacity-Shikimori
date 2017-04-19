@@ -85,9 +85,14 @@ class ProfileViewController: CustomNavViewController {
         
         if let _ = type {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            
             let vc = storyboard.instantiateViewController(withIdentifier: "MainCollectionViewController") as! NewsViewController
             vc.type = type!
-            present(vc, animated: true, completion: nil)
+            
+            let nvc = storyboard.instantiateViewController(withIdentifier: "NavigationController") as! UINavigationController
+            nvc.setViewControllers([vc], animated: true)
+            
+            show(vc, sender: true)
         }
     }
 }
@@ -144,18 +149,23 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             return UIView()
         } else {
-            let sectionView = UIView(frame: CGRect(x: 0.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width, height: tableView.sectionHeaderHeight))
+            let sectionView = UIView(frame: CGRect(x: 0.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width, height: tableView.sectionHeaderHeight - 2.0))
             
-            let titleLabel = UILabel(frame: CGRect(x: 0.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2, height: tableView.sectionHeaderHeight))
+            let titleLabel = UILabel(frame: CGRect(x: 8.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2 - 8.0, height: tableView.sectionHeaderHeight))
+            titleLabel.font = UIFont.systemFont(ofSize: 14.0)
             titleLabel.text = sectionHeaders[section - 1]
             titleLabel.textColor = .black
             
-            let but = UIButton(frame: CGRect(x: view.frame.size.width / 2, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2, height: tableView.sectionHeaderHeight))
+            let but = UIButton(frame: CGRect(x: view.frame.size.width / 2, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2 - 8.0, height: tableView.sectionHeaderHeight))
             but.addTarget(self, action: #selector(showAll), for: .touchUpInside)
-            but.setTitle(sectionHeaders[section - 1], for: .normal)
-            but.setTitleColor(.red, for: .normal)
+            but.setTitle("Весь список", for: .normal)
+            but.setTitleColor(Constants.SystemColor.blue, for: .normal)
+            but.titleLabel!.font = UIFont.systemFont(ofSize: 14.0)
+            but.contentHorizontalAlignment = .right
+            but.contentVerticalAlignment = .bottom
             but.tag = section
             
+            sectionView.clipsToBounds = true
             sectionView.addSubview(titleLabel)
             sectionView.addSubview(but)
             

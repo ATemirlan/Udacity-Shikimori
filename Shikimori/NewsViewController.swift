@@ -13,6 +13,7 @@ class NewsViewController: CustomNavViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var leftButton: UIBarButtonItem!
 
     var animes = [Anime]()
     var previewAnime: Anime?
@@ -30,6 +31,15 @@ class NewsViewController: CustomNavViewController {
     
     func setupView() {
         if let _ = type {
+            view.removeGestureRecognizer(revealViewController().panGestureRecognizer())
+            
+            navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+            
+            leftButton.image = UIImage(named: "back")
+            leftButton.target = self
+            leftButton.action = #selector(goBack)
+            
             filterButton.image = nil
             filterButton.isEnabled = false
             collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -41,6 +51,10 @@ class NewsViewController: CustomNavViewController {
         }
         
         setupLongGesture()
+    }
+    
+    func goBack() {
+        self.navigationController!.popViewController(animated: true)
     }
     
     func getAnimeList(with filter: String?, at page: Int) {
