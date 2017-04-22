@@ -39,6 +39,8 @@ class FilterViewController: AbstractViewController {
                     return $0.russianName! < $1.russianName!
                 })
                 self.tableView.reloadData()
+            } else if let _ = error {
+                Utils().showError(text: error!, at: self)
             }
         }
     }

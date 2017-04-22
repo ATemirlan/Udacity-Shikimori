@@ -33,24 +33,34 @@ class ProfileViewController: CustomNavViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+    }
+    
+    func setup() {
         if let _ = profile {
             setupHeader()
-            
+            getAnimes()
             tableView.isHidden = false
             loginButton.isHidden = true
             notLabel.isHidden = true
-            
-            getAnimes(with: list.completed)
-            getAnimes(with: list.dropped)
-            getAnimes(with: list.on_hold)
-            getAnimes(with: list.planned)
-            getAnimes(with: list.watching)
         } else {
             loginButton.isHidden = false
             notLabel.isHidden = false
             tableView.isHidden = true
         }
+    }
+    
+    func getAnimes() {
+        getAnimes(with: list.completed)
+        getAnimes(with: list.dropped)
+        getAnimes(with: list.on_hold)
+        getAnimes(with: list.planned)
+        getAnimes(with: list.watching)
     }
 
     func setupHeader() {

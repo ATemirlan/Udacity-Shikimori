@@ -37,6 +37,8 @@
 		14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6A2691EA1E4010070A4FD /* FilterViewController.swift */; };
 		14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */; };
 		14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */; };
+		14E901341EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E901321EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld */; };
+		14E901361EAB51D000511A9E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E901351EAB51D000511A9E /* CoreDataStack.swift */; };
 		14E904C41E8641860009C777 /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine.swift */; };
 		14E904C91E8644B40009C777 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C81E8644B40009C777 /* Constants.swift */; };
 		14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F1B91F1EA1F95300D9E8FE /* Genre.swift */; };
@@ -78,6 +80,8 @@
 		14B6A2691EA1E4010070A4FD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
+		14E901331EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShikimoriDataBase.xcdatamodel; sourceTree = "<group>"; };
+		14E901351EAB51D000511A9E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		14E904C31E8641860009C777 /* RequestEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine.swift; sourceTree = "<group>"; };
 		14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shikimori-Bridging-Header.h"; sourceTree = "<group>"; };
 		14E904C81E8644B40009C777 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -164,9 +168,9 @@
 				144C65201EA37C510009649C /* LoginViewController.swift */,
 				144D3F121EA3541600D56D7A /* ProfileViewController.swift */,
 				148812C21E8640C700B580BC /* NewsViewController.swift */,
-				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
 				142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */,
 				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
+				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
 			);
 			name = Anime;
 			sourceTree = "<group>";
@@ -210,6 +214,15 @@
 			path = Shikimori;
 			sourceTree = "<group>";
 		};
+		14E901371EAB51E400511A9E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				14E901321EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld */,
+				14E901351EAB51D000511A9E /* CoreDataStack.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		14E904C21E86416A0009C777 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +249,7 @@
 				14F1B91F1EA1F95300D9E8FE /* Genre.swift */,
 				14E904C81E8644B40009C777 /* Constants.swift */,
 				141494661E86897800769C02 /* Utils.swift */,
+				14E901371EAB51E400511A9E /* CoreData */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -391,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14E901341EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld in Sources */,
 				142288D71E8FB09B00AEB097 /* CustomNavViewController.swift in Sources */,
 				148812B11E86409300B580BC /* AppDelegate.swift in Sources */,
 				144D3F171EA359BE00D56D7A /* ProfileMenuTableViewCell.swift in Sources */,
@@ -399,6 +414,7 @@
 				144C65211EA37C510009649C /* LoginViewController.swift in Sources */,
 				14368FC91E90EA6500E48027 /* DescriptionTableViewCell.swift in Sources */,
 				144D3F151EA3593800D56D7A /* MenuTableViewController.swift in Sources */,
+				14E901361EAB51D000511A9E /* CoreDataStack.swift in Sources */,
 				141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */,
 				14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */,
 				144F1FA61E867A160009260E /* Anime.swift in Sources */,
@@ -485,7 +501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -529,7 +545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Shikimori/Shikimori-Bridging-Header.h";
@@ -546,7 +562,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = S9TF7DAU5J;
 				INFOPLIST_FILE = Shikimori/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -562,7 +578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = S9TF7DAU5J;
 				INFOPLIST_FILE = Shikimori/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -592,6 +608,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		14E901321EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				14E901331EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodel */,
+			);
+			currentVersion = 14E901331EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodel */;
+			path = ShikimoriDataBase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 148812A51E86409200B580BC /* Project object */;
 }

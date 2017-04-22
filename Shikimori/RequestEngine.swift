@@ -134,7 +134,6 @@ class RequestEngine: NSObject {
         }
     }
 
-    
     func getAnimes(with filter: String?, at page: Int, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
         let url = urls.animes.replacingOccurrences(of: "{page}", with: "\(page)") + (filter ?? "")
         retrieveAnimeList(url) { (animes, err) in
@@ -151,7 +150,7 @@ class RequestEngine: NSObject {
                 
                 if let animeArr = response as? [[String : Any]] {
                     for animeInfo in animeArr {
-                        if let anime = Anime(with: animeInfo) {
+                        if let anime = Anime(with: animeInfo, or: nil) {
                             animes.append(anime)
                         }
                     }
@@ -181,7 +180,10 @@ class RequestEngine: NSObject {
                 var anime: Anime? = nil
                 
                 if let animeArr = response as? [String : Any] {
-                    anime = Anime(with: animeArr)
+                    if let anim = Anime(with: animeArr, or: nil) {
+                        CoreDataStack.shared.save(anime: anim)
+                        anime = anim
+                    }
                 }
                 
                 self.removeProgressHud()
@@ -206,7 +208,7 @@ class RequestEngine: NSObject {
                 
                 if let result = response as? [[String : Any]] {
                     for animeInfo in result {
-                        if let anime = Anime(with: animeInfo) {
+                        if let anime = Anime(with: animeInfo, or: nil) {
                             similars.append(anime)
                         }
                     }
@@ -224,15 +226,14 @@ class RequestEngine: NSObject {
         }
     }
     
-    func getRate(animeId: String, completion: @escaping (_ error: String?) -> Void) {
+    // Method is should not be used
+    func getRate(userRateId: Int, completion: @escaping (_ error: String?) -> Void) {
         addProgressHud()
         
         if isInternet() {
-            let url = urls.getRate.replacingOccurrences(of: "{id}", with: "\(animeId)")
+            let url = urls.getRate.replacingOccurrences(of: "{id}", with: "\(userRateId)")
             
             manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-                
-                print(response)
                 
                 self.removeProgressHud()
                 completion(nil)
@@ -278,11 +279,11 @@ class RequestEngine: NSObject {
         }
     }
     
-    func removeFromList(anime animeId: Int, completion: @escaping (_ success: Bool, _ error: String?) -> Void) {
+    func removeFromList(userRateId: Int, completion: @escaping (_ success: Bool, _ error: String?) -> Void) {
         addProgressHud()
         
         if isInternet() {
-            let url = urls.removeFromList.replacingOccurrences(of: "{id}", with: "\(animeId)")
+            let url = urls.removeFromList.replacingOccurrences(of: "{id}", with: "\(userRateId)")
             
             manager().delete(url, parameters: nil, success: { (dataTask, response) in
                 var success = false

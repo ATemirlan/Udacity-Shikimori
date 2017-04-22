@@ -17,6 +17,12 @@ class Utils: NSObject {
         CATransaction.commit()
     }
     
+    func showError(text: String, at vc: UIViewController) {
+        let controller = UIAlertController(title: "Ошибка", message: text, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        vc.present(controller, animated: true, completion: nil)
+    }
+    
 }
 
 extension Date {

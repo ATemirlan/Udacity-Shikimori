@@ -11,6 +11,7 @@ import UIKit
 class AnimePreviewViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var anime: Anime?
+    var animeId: Int?
     
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -30,18 +31,30 @@ class AnimePreviewViewController: UIViewController, UIGestureRecognizerDelegate 
         tap.delegate = self
         
         if let _ = anime {
-            RequestEngine.shared.getAnime(by: anime!.id!, withProgress: false, completion: { (anim, error) in
-                if let _ = anim {
-                    self.anime = anim
-                    self.titleLabel.text = self.anime?.russianName ?? self.anime?.name!
-                    self.imageView.setImageWith(self.anime!.imageUrl!, placeholderImage: UIImage(named: "placeholder"))
-                    self.ratingView.value = self.anime!.score! / 2.0
-                    self.scoreLabel.text = "\(self.anime!.score!)"
-                    self.genresLabel.text = self.anime!.genres!
-                    self.typeLabel.text = self.anime!.kind?.animeType
-                    self.descriptionLabel.text = self.anime?.descript ?? "NO DESCRIPTION"
-                }
-            })
+            self.titleLabel.text = self.anime?.russianName ?? self.anime?.name!
+            self.imageView.setImageWith(self.anime!.imageUrl!, placeholderImage: UIImage(named: "placeholder"))
+            self.ratingView.value = (self.anime!.score ?? 0.0) / 2.0
+            self.scoreLabel.text = "\(self.anime!.score  ?? 0.0)"
+            self.genresLabel.text = self.anime!.genres ?? ""
+            self.typeLabel.text = self.anime!.kind?.animeType
+            self.descriptionLabel.text = self.anime?.descript ?? "NO DESCRIPTION"
+        } else {
+            if let _ = animeId {
+                RequestEngine.shared.getAnime(by: animeId!, withProgress: false, completion: { (anim, error) in
+                    if let _ = anim {
+                        self.anime = anim
+                        self.titleLabel.text = self.anime?.russianName ?? self.anime?.name!
+                        self.imageView.setImageWith(self.anime!.imageUrl!, placeholderImage: UIImage(named: "placeholder"))
+                        self.ratingView.value = self.anime!.score! / 2.0
+                        self.scoreLabel.text = "\(self.anime!.score!)"
+                        self.genresLabel.text = self.anime!.genres!
+                        self.typeLabel.text = self.anime!.kind?.animeType
+                        self.descriptionLabel.text = self.anime?.descript ?? "NO DESCRIPTION"
+                    } else if let _ = error {
+                        Utils().showError(text: error!, at: self)
+                    }
+                })
+            }
         }
     }
 

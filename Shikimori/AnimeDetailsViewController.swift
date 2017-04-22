@@ -19,21 +19,17 @@ class AnimeDetailsViewController: AbstractViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = anime?.russianName ?? anime?.name
         
-        RequestEngine.shared.getRate(animeId: User.current.id!) { (error) in
-            print(error)
-        }
-        
-        anime?.getAll()
+        setupBar()
         setupTableView()
         getSimilarSection()
-        title = anime?.russianName ?? anime?.name
     }
     
     func getSimilarSection() {
         RequestEngine.shared.getSimilarAnimes(from: anime!.id!) { (similars, error) in
             if let _ = error {
-                
+                Utils().showError(text: error!, at: self)
             } else {
                 self.similarAnimes = similars
                 self.tableView.reloadData()
@@ -76,6 +72,16 @@ class AnimeDetailsViewController: AbstractViewController {
             })
         }
         
+        
+        let removeAction = UIAlertAction(title: "Удлаить из списка", style: .destructive) { (action) in
+            RequestEngine.shared.removeFromList(userRateId: self.anime!.userRateId!, completion: { (success, error) in
+                if success == true {
+                    self.starButtonItem.image = UIImage(named: "star")
+                }
+            })
+        }
+        
+        
         let cancel = UIAlertAction(title: "Отменить", style: .cancel) { (action) in
             alert.dismiss(animated: true, completion: nil)
         }
@@ -85,6 +91,11 @@ class AnimeDetailsViewController: AbstractViewController {
         alert.addAction(plannedAction)
         alert.addAction(onholdAction)
         alert.addAction(droppedAction)
+        
+        if let _ = anime?.userRateId {
+            alert.addAction(removeAction)
+        }
+        
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
@@ -103,6 +114,8 @@ class AnimeDetailsViewController: AbstractViewController {
     func showNotification(isAdded: Bool, alert: UIAlertController) {
         if isAdded {
             self.starButtonItem.image = UIImage(named: "star_filled")
+        } else {
+            Utils().showError(text: "", at: self)
         }
     }
     
@@ -205,6 +218,16 @@ extension AnimeDetailsViewController: UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    func setupBar() {
+        if User.current.id == nil {
+            starButtonItem.image = UIImage()
+        } else {
+            if let _ = anime?.userRateId {
+                self.starButtonItem.image = UIImage(named: "star_filled")
+            }
+        }
+    }
+    
     func setupTableView() {
         tableView.estimatedRowHeight = 68.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -239,6 +262,8 @@ extension AnimeDetailsViewController: UICollectionViewDataSource, UICollectionVi
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as! AnimeDetailsViewController
                     vc.anime = anim
                     self.navigationController?.show(vc, sender: nil)
+                } else if let _ = error {
+                    Utils().showError(text: error!, at: self)
                 }
             })
         }

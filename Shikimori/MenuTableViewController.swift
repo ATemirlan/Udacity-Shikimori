@@ -37,6 +37,8 @@ class MenuTableViewController: UITableViewController {
                 RequestEngine.shared.getProfile(by: User.current.id!, completion: { (profile, error) in
                     if let _ = profile {
                         self.performSegue(withIdentifier: "ProfileSegue", sender: profile)
+                    } else if let _ = error {
+                        Utils().showError(text: error!, at: self)
                     }
                 })
             } else {

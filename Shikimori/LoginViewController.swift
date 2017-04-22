@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
             
             RequestEngine.shared.login(nickname: loginField.text!, password: passwordField.text!, completion: { (code, error) in
                 if let _ = error {
-                    
+                    Utils().showError(text: error!, at: self)
                 } else if code == 200 {
                     RequestEngine.shared.whoami { (profile) in
                         if let _ = profile {

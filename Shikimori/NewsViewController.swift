@@ -59,21 +59,26 @@ class NewsViewController: CustomNavViewController {
     
     func getAnimeList(with filter: String?, at page: Int) {
         RequestEngine.shared.getAnimes(with: filter, at: page) { (animes, error) in
-            if let _ = animes, animes!.count > 0 {
-                self.animes.append(contentsOf: animes!)
-                
-                if page == 1 {
-                    self.setupFlowLayout()
+            if let _ = error {
+                self.reachesEnd = true
+                Utils().showError(text: error!, at: self)
+            } else {
+                if let _ = animes, animes!.count > 0 {
+                    self.animes.append(contentsOf: animes!)
+                    
+                    if page == 1 {
+                        self.setupFlowLayout()
+                    }
+                    
+                    if animes!.count < 50 {
+                        self.reachesEnd = true
+                    }
+                    
+                    self.page += 1
                 }
                 
-                if animes!.count < 50 {
-                    self.reachesEnd = true
-                }
-                
-                self.page += 1
+                self.collectionView.reloadData()
             }
-            
-            self.collectionView.reloadData()
         }
     }
     
@@ -117,12 +122,21 @@ extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecog
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as? AnimeDetailsViewController {
             if let _ = previewAnime {
-                RequestEngine.shared.getAnime(by: previewAnime!.id!, withProgress: false, completion: { (anim, error) in
-                    if let _ = anim {
-                        vc.anime = anim!
-                        self.show(vc, sender: self)
+                if let previewArr = CoreDataStack.shared.getAnimes(with: true, by: previewAnime!.id!) {
+                    if let localAnime = previewArr.first {
+                        if let an = Anime(with: nil, or: localAnime) {
+                            vc.anime = an
+                            self.show(vc, sender: self)
+                        }
                     }
-                })
+                } else {
+                    RequestEngine.shared.getAnime(by: previewAnime!.id!, withProgress: false, completion: { (anim, error) in
+                        if let _ = anim {
+                            vc.anime = anim!
+                            self.show(vc, sender: self)
+                        }
+                    })
+                }
             }
         }
     }
@@ -138,8 +152,17 @@ extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecog
         }
         
         let anime = animes[indexPath.row]
-        vc.anime = anime
         previewAnime = anime
+        
+        if let previewArr = CoreDataStack.shared.getAnimes(with: true, by: previewAnime!.id!) {
+            if let localAnime = previewArr.first {
+                if let an = Anime(with: nil, or: localAnime) {
+                    vc.anime = an
+                }
+            }
+        } else {
+            vc.animeId = anime.id
+        }
         
         return vc
     }
@@ -191,6 +214,8 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
             RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
                 if let _ = anim {
                     self.performSegue(withIdentifier: "animeDetails", sender: anim)
+                } else if let _ = error {
+                    Utils().showError(text: error!, at: self)
                 }
             })
         }
@@ -267,7 +292,7 @@ extension NewsViewController: UISearchBarDelegate {
         if !searchBar.text!.isCyrillic {
             RequestEngine.shared.searchAnimes(by: searchBar.text!) { (animes, error) in
                 if let _ = error {
-                    print(error!)
+                    Utils().showError(text: error!, at: self)
                 } else {
                     if let _ = animes {
                         self.animes = animes!
@@ -276,7 +301,7 @@ extension NewsViewController: UISearchBarDelegate {
                 }
             }
         } else {
-            print("Поиск производится по английскому названию")
+            Utils().showError(text: "Поиск производится по английскому названию", at: self)
         }
     }
     
