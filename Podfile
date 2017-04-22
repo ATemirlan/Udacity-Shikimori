@@ -5,5 +5,6 @@ target 'Shikimori' do
 
   pod 'AFNetworking', '~> 3.0'
   pod 'ReachabilitySwift', '~> 3'
+  pod "MXParallaxHeader"
 
 end

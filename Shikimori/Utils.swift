@@ -66,7 +66,7 @@ extension Int {
             }
         }
         
-        return ""
+        return "Unknown error occured"
     }
     
 }

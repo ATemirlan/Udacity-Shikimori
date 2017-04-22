@@ -11,6 +11,7 @@ import UIKit
 class AnimeDetailsViewController: AbstractViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var starButtonItem: UIBarButtonItem!
     
     var anime: Anime?
     var similarAnimes: [Anime]?
@@ -18,6 +19,10 @@ class AnimeDetailsViewController: AbstractViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        RequestEngine.shared.getRate(animeId: User.current.id!) { (error) in
+            print(error)
+        }
         
         anime?.getAll()
         setupTableView()
@@ -35,6 +40,72 @@ class AnimeDetailsViewController: AbstractViewController {
             }
         }
     }
+    
+    @IBAction func starAction(_ sender: UIBarButtonItem) {
+        let list = Constants.MyList.self
+        
+        let alert = UIAlertController(title: "В какой список добавить аниме?", message: "", preferredStyle: .actionSheet)
+        
+        let completedAction = UIAlertAction(title: "Просмотрено", style: .default) { (action) in
+            self.performAction(on: list.completed, completion: { (isAdded) in
+                self.showNotification(isAdded: isAdded, alert: alert)
+            })
+        }
+        
+        let watchingAction = UIAlertAction(title: "Смотрю", style: .default) { (action) in
+            self.performAction(on: list.watching, completion: { (isAdded) in
+                self.showNotification(isAdded: isAdded, alert: alert)
+            })
+        }
+        
+        let plannedAction = UIAlertAction(title: "Запланировано", style: .default) { (action) in
+            self.performAction(on: list.planned, completion: { (isAdded) in
+                self.showNotification(isAdded: isAdded, alert: alert)
+            })
+        }
+        
+        let onholdAction = UIAlertAction(title: "Отложено", style: .default) { (action) in
+            self.performAction(on: list.on_hold, completion: { (isAdded) in
+                self.showNotification(isAdded: isAdded, alert: alert)
+            })
+        }
+        
+        let droppedAction = UIAlertAction(title: "Брошено", style: .default) { (action) in
+            self.performAction(on: list.dropped, completion: { (isAdded) in
+                self.showNotification(isAdded: isAdded, alert: alert)
+            })
+        }
+        
+        let cancel = UIAlertAction(title: "Отменить", style: .cancel) { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(completedAction)
+        alert.addAction(watchingAction)
+        alert.addAction(plannedAction)
+        alert.addAction(onholdAction)
+        alert.addAction(droppedAction)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func performAction(on list: String, completion: @escaping (_ isAdded: Bool) -> Void) {
+        RequestEngine.shared.add(anime: anime!.id!, to: list) { (isAdded, error) in
+            if let _ = error {
+                completion(false)
+            } else {
+                completion(isAdded)
+            }
+        }
+    }
+    
+    func showNotification(isAdded: Bool, alert: UIAlertController) {
+        if isAdded {
+            self.starButtonItem.image = UIImage(named: "star_filled")
+        }
+    }
+    
 }
 
 extension AnimeDetailsViewController: UITableViewDataSource, UITableViewDelegate {

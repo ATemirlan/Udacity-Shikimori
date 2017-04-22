@@ -224,6 +224,85 @@ class RequestEngine: NSObject {
         }
     }
     
+    func getRate(animeId: String, completion: @escaping (_ error: String?) -> Void) {
+        addProgressHud()
+        
+        if isInternet() {
+            let url = urls.getRate.replacingOccurrences(of: "{id}", with: "\(animeId)")
+            
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                
+                print(response)
+                
+                self.removeProgressHud()
+                completion(nil)
+            }, failure: { (dataTask, err) in
+                self.removeProgressHud()
+                completion(self.getCode(from: dataTask).errorCodeDescription())
+            })
+        } else {
+            self.removeProgressHud()
+            completion(networkError)
+        }
+    }
+    
+    func add(anime animeId: Int, to list: String, completion: @escaping (_ success: Bool, _ error: String?) -> Void) {
+        addProgressHud()
+        
+        if isInternet() {
+            let params = [
+                "user_rate" : [
+                    "user_id" : User.current.id!,
+                    "target_id" : "\(animeId)",
+                    "target_type" : "Anime",
+                    "status" : list
+                ]
+            ]
+            
+            manager().post(urls.addToList, parameters: params, progress: nil, success: { (dataTask, response) in
+                var success = false
+                
+                if (200...299).contains(self.getCode(from: dataTask)) {
+                    success = true
+                }
+                
+                self.removeProgressHud()
+                completion(success, nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(false, self.getCode(from: dataTask).errorCodeDescription())
+            }
+        } else {
+            self.removeProgressHud()
+            completion(false, networkError)
+        }
+    }
+    
+    func removeFromList(anime animeId: Int, completion: @escaping (_ success: Bool, _ error: String?) -> Void) {
+        addProgressHud()
+        
+        if isInternet() {
+            let url = urls.removeFromList.replacingOccurrences(of: "{id}", with: "\(animeId)")
+            
+            manager().delete(url, parameters: nil, success: { (dataTask, response) in
+                var success = false
+                
+                if (200...299).contains(self.getCode(from: dataTask)) {
+                    success = true
+                }
+                
+                self.removeProgressHud()
+                completion(success, self.getCode(from: dataTask).errorCodeDescription())
+            }, failure: { (dataTask, err) in
+                self.removeProgressHud()
+                completion(false, self.getCode(from: dataTask).errorCodeDescription())
+            })
+            
+        } else {
+            completion(false, networkError)
+        }
+    }
+    
 }
 
 private extension RequestEngine {

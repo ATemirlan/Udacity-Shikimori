@@ -14,16 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - MXParallaxHeader (0.6.0)
   - ReachabilitySwift (3)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - MXParallaxHeader
   - ReachabilitySwift (~> 3)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  MXParallaxHeader: 2997592b8349baf8557ae0e4346f6b17e141de39
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
 
-PODFILE CHECKSUM: b327b3fc7694dc9ac6bc4fb0274d438a4c101fd1
+PODFILE CHECKSUM: 88a464ef8d0f9e14238782f6603f05f6bd257597
 
 COCOAPODS: 1.1.1

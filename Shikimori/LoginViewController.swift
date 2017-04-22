@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol LoginDelegate {
+    func loginCompleted(with profile: Profile?)
+}
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
     var placeholders = ["Логин", "Пароль"]
+    var delegate: LoginDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +45,10 @@ class LoginViewController: UIViewController {
                             User.current.id = "\(profile!.id!)"
                             User.current.nickname = profile!.nickname!
                             User.current.avatarUrl = "\(profile!.avatarUrl!)"
-                            self.dismiss(animated: true, completion: nil)
+                            
+                            self.dismiss(animated: true, completion: { 
+                                self.delegate?.loginCompleted(with: profile)
+                            })
                         }
                     }
                 }

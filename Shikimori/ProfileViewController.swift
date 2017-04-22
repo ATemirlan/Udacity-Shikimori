@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import MXParallaxHeader
 
 class ProfileViewController: CustomNavViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet var headerView: UIView!
+    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var avatarView: UIImageView!
+    
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var notLabel: UILabel!
     
     let list = Constants.MyList.self
     var storedOffsets = [Int: CGFloat]()
@@ -25,22 +33,40 @@ class ProfileViewController: CustomNavViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "AnimeHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "AnimeHeader")
-        
-        getAnimes(with: list.completed)
-        getAnimes(with: list.dropped)
-        getAnimes(with: list.on_hold)
-        getAnimes(with: list.planned)
-        getAnimes(with: list.watching)
-        
-        self.automaticallyAdjustsScrollViewInsets = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
-        super.viewDidAppear(animated)
+
+        if let _ = profile {
+            setupHeader()
+            
+            tableView.isHidden = false
+            loginButton.isHidden = true
+            notLabel.isHidden = true
+            
+            getAnimes(with: list.completed)
+            getAnimes(with: list.dropped)
+            getAnimes(with: list.on_hold)
+            getAnimes(with: list.planned)
+            getAnimes(with: list.watching)
+        } else {
+            loginButton.isHidden = false
+            notLabel.isHidden = false
+            tableView.isHidden = true
+        }
     }
 
+    func setupHeader() {
+        avatarView.layer.cornerRadius = avatarView.frame.size.height / 2
+        avatarView.layer.borderWidth = 1.0
+        avatarView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        tableView.parallaxHeader.view = headerView
+        tableView.parallaxHeader.minimumHeight = 0
+        tableView.parallaxHeader.height = 120
+        tableView.parallaxHeader.mode = .center
+        
+        avatarView.setImageWith(profile!.avatarUrl!, placeholderImage: UIImage(named: "temp_profile"))
+        nicknameLabel.text = profile!.nickname ?? ""
+    }
+    
     func getAnimes(with type: String) {
         RequestEngine.shared.getMyListAnimes(with: type) { (animes, error) in
             if let _ = error {
@@ -49,15 +75,15 @@ class ProfileViewController: CustomNavViewController {
                 if let _ = animes, animes!.count > 0 {
                     switch type {
                     case self.list.completed:
-                        self.completedAnimes.append(contentsOf: animes!)
+                        self.completedAnimes = animes!
                     case self.list.planned:
-                        self.plannedAnimes.append(contentsOf: animes!)
+                        self.plannedAnimes = animes!
                     case self.list.on_hold:
-                        self.onholdAnimes.append(contentsOf: animes!)
+                        self.onholdAnimes = animes!
                     case self.list.watching:
-                        self.watchingAnimes.append(contentsOf: animes!)
+                        self.watchingAnimes = animes!
                     case self.list.dropped:
-                        self.droppedAnimes.append(contentsOf: animes!)
+                        self.droppedAnimes = animes!
                     default:
                         return
                     }
@@ -69,24 +95,37 @@ class ProfileViewController: CustomNavViewController {
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        Utils().popViewControllerAnimated(navController: navigationController!) { 
+        let alert = UIAlertController(title: "Выход.", message: "Вы уверены?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Да", style: .default, handler: { (action) in
             User.current.deleteUser()
-        }
+            self.profile = nil
+            self.viewDidLoad()
+        }))
+            
+        alert.addAction(UIAlertAction(title: "Нет", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func presentLogin(_ sender: UIButton) {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        vc.delegate = self
+        present(vc, animated: true, completion: {})
     }
     
     func showAll(but: UIButton) {
         var type: String? = nil
         
         switch but.tag {
-        case 1:
+        case 0:
             type = list.planned
-        case 2:
+        case 1:
             type = list.watching
-        case 3:
+        case 2:
             type = list.completed
-        case 4:
+        case 3:
             type = list.dropped
-        case 5:
+        case 4:
             type = list.on_hold
         default:
             type = nil
@@ -106,10 +145,21 @@ class ProfileViewController: CustomNavViewController {
     }
 }
 
+extension ProfileViewController: LoginDelegate {
+    
+    func loginCompleted(with profile: Profile?) {
+        if let _ = profile {
+            self.profile = profile
+            viewDidLoad()
+        }
+    }
+    
+}
+
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,18 +167,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeader") as! ProfilHeaderTableViewCell
-            
-            if let _ = profile {
-                cell.avatarView.setImageWith(profile!.avatarUrl!)
-                cell.nickname.text = profile!.nickname
-            }
-            
-            return cell
-        } else {
-            return tableView.dequeueReusableCell(withIdentifier: "AnimeCell") as! AnimeSimilarTableViewCell
-        }
+        return tableView.dequeueReusableCell(withIdentifier: "AnimeCell") as! AnimeSimilarTableViewCell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -145,29 +184,20 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 120.0
-        case 1...5:
-            if let list = chooseList(from: indexPath.section), list.count > 0 {
-                return 166.0
-            } else {
-                return CGFloat.leastNormalMagnitude
-            }
-        default:
+        if let list = chooseList(from: indexPath.section), list.count > 0 {
+            return 166.0
+        } else {
             return CGFloat.leastNormalMagnitude
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return UIView()
-        } else {
+        if let _ = profile {
             let sectionView = UIView(frame: CGRect(x: 0.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width, height: tableView.sectionHeaderHeight - 2.0))
             
             let titleLabel = UILabel(frame: CGRect(x: 8.0, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2 - 8.0, height: tableView.sectionHeaderHeight))
             titleLabel.font = UIFont.systemFont(ofSize: 14.0)
-            titleLabel.text = sectionHeaders[section - 1] + " " + properNumber(listType: section, profile: profile!)
+            titleLabel.text = sectionHeaders[section] + " " + properNumber(listType: section, profile: profile!)
             titleLabel.textColor = .black
             
             let but = UIButton(frame: CGRect(x: view.frame.size.width / 2, y: tableView.sectionHeaderHeight, width: view.frame.size.width / 2 - 8.0, height: tableView.sectionHeaderHeight))
@@ -184,18 +214,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             sectionView.addSubview(but)
             
             return sectionView
+        } else {
+            return UIView()
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return CGFloat.leastNormalMagnitude
+        if let list = chooseList(from: section) {
+            return list.count > 0 ? 38.0 : CGFloat.leastNormalMagnitude
         } else {
-            if let list = chooseList(from: section) {
-                return list.count > 0 ? 38.0 : CGFloat.leastNormalMagnitude
-            } else {
-                return CGFloat.leastNormalMagnitude
-            }
+            return CGFloat.leastNormalMagnitude
         }
     }
     
@@ -243,18 +271,33 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func properNumber(listType: Int, profile: Profile) -> String {
         switch listType {
+        case 0:
+            if let _ = profile.planned {
+                return "(\(profile.planned!))"
+            }
+            return ""
         case 1:
-            return "(\(profile.planned ?? 0))"
+            if let _ = profile.watching {
+                return "(\(profile.watching!))"
+            }
+            return ""
         case 2:
-            return "(\(profile.watching ?? 0))"
+            if let _ = profile.completed {
+                return "(\(profile.completed!))"
+            }
+            return ""
         case 3:
-            return "(\(profile.completed ?? 0))"
+            if let _ = profile.dropped {
+                return "(\(profile.dropped!))"
+            }
+            return ""
         case 4:
-            return "(\(profile.dropped ?? 0))"
-        case 5:
-            return "(\(profile.on_hold ?? 0))"
+            if let _ = profile.on_hold {
+                return "(\(profile.on_hold!))"
+            }
+            return ""
         default:
-            return "(0)"
+            return ""
         }
     }
     
@@ -269,15 +312,15 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func chooseList(from section: Int) -> [Anime]? {
         switch section {
-        case 1:
+        case 0:
             return plannedAnimes
-        case 2:
+        case 1:
             return watchingAnimes
-        case 3:
+        case 2:
             return completedAnimes
-        case 4:
+        case 3:
             return droppedAnimes
-        case 5:
+        case 4:
             return onholdAnimes
         default:
             return [Anime]()

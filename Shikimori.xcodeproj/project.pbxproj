@@ -37,7 +37,6 @@
 		14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6A2691EA1E4010070A4FD /* FilterViewController.swift */; };
 		14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */; };
 		14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */; };
-		14E16ADA1EA65BF200B99842 /* ProfilHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E16AD91EA65BF200B99842 /* ProfilHeaderTableViewCell.swift */; };
 		14E904C41E8641860009C777 /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine.swift */; };
 		14E904C91E8644B40009C777 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C81E8644B40009C777 /* Constants.swift */; };
 		14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F1B91F1EA1F95300D9E8FE /* Genre.swift */; };
@@ -79,7 +78,6 @@
 		14B6A2691EA1E4010070A4FD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
-		14E16AD91EA65BF200B99842 /* ProfilHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		14E904C31E8641860009C777 /* RequestEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine.swift; sourceTree = "<group>"; };
 		14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shikimori-Bridging-Header.h"; sourceTree = "<group>"; };
 		14E904C81E8644B40009C777 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 				14368FCA1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift */,
 				14AA83D21EA202EA0025A277 /* RateFilterTableViewCell.swift */,
 				144D3F161EA359BE00D56D7A /* ProfileMenuTableViewCell.swift */,
-				14E16AD91EA65BF200B99842 /* ProfilHeaderTableViewCell.swift */,
 				14368FC61E90DB2800E48027 /* AnimeHeader */,
 			);
 			name = Table;
@@ -416,7 +413,6 @@
 				14368FC41E90DB2400E48027 /* AnimeHeaderTableViewCell.swift in Sources */,
 				144D3F111EA34A0900D56D7A /* Profile.swift in Sources */,
 				14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */,
-				14E16ADA1EA65BF200B99842 /* ProfilHeaderTableViewCell.swift in Sources */,
 				14368FBE1E90238100E48027 /* AXRatingView.m in Sources */,
 				14368FCC1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift in Sources */,
 				14AA83D51EA207DD0025A277 /* RatingButton.swift in Sources */,

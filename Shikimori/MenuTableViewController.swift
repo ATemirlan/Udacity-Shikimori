@@ -40,9 +40,7 @@ class MenuTableViewController: UITableViewController {
                     }
                 })
             } else {
-                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-                present(vc, animated: true, completion: {})
+                self.performSegue(withIdentifier: "ProfileSegue", sender: nil)
             }
         }
     }
