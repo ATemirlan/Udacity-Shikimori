@@ -106,6 +106,22 @@ struct CoreDataStack {
         }
     }
     
+    func remove(anime: Anime) {
+        if let localAnime = getAnimes(with: true, by: anime.id!)?.first {
+            context.delete(localAnime)
+            save()
+        }
+    }
+    
+    func removeAll() {
+        if let animeArray = getAnimes(with: false, by: nil) {
+            for local in animeArray {
+                context.delete(local)
+            }
+            save()
+        }
+    }
+    
     func getAnimes(with usingPredicate: Bool, by animeId: Int?) -> [LocalAnime]? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LocalAnime")
         

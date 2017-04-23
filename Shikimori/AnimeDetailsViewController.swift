@@ -27,11 +27,14 @@ class AnimeDetailsViewController: AbstractViewController {
     }
     
     func getSimilarSection() {
-        RequestEngine.shared.getSimilarAnimes(from: anime!.id!) { (similars, error) in
-            if let _ = error {
-                Utils().showError(text: error!, at: self)
-            } else {
-                self.similarAnimes = similars
+        if RequestEngine.shared.isInternet() {
+            RequestEngine.shared.getSimilarAnimes(from: anime!.id!) { (similars, error) in
+                if let _ = error {
+                    self.similarAnimes = [Anime]()
+                    Utils().showError(text: error!, at: self)
+                } else {
+                    self.similarAnimes = similars
+                }
                 self.tableView.reloadData()
             }
         }
@@ -76,6 +79,10 @@ class AnimeDetailsViewController: AbstractViewController {
         let removeAction = UIAlertAction(title: "Удлаить из списка", style: .destructive) { (action) in
             RequestEngine.shared.removeFromList(userRateId: self.anime!.userRateId!, completion: { (success, error) in
                 if success == true {
+                    if let _ = self.anime {
+                        CoreDataStack.shared.remove(anime: self.anime!)
+                    }
+                    
                     self.starButtonItem.image = UIImage(named: "star")
                 }
             })
@@ -106,6 +113,9 @@ class AnimeDetailsViewController: AbstractViewController {
             if let _ = error {
                 completion(false)
             } else {
+                if let _ = self.anime {
+                    CoreDataStack.shared.save(anime: self.anime!)
+                }
                 completion(isAdded)
             }
         }
@@ -219,7 +229,7 @@ extension AnimeDetailsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func setupBar() {
-        if User.current.id == nil {
+        if User.current.id == nil || RequestEngine.shared.isInternet() == false {
             starButtonItem.image = UIImage()
         } else {
             if let _ = anime?.userRateId {

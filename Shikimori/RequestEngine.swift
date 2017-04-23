@@ -30,14 +30,22 @@ class RequestEngine: NSObject {
             ]
             
             AFHTTPSessionManager().post(url, parameters: params, progress: nil, success: { (dataTask, response) in
+                var err: String? = nil
                 
                 if let info = response as? [String : String] {
-                    User.current.nickname = nickname
-                    User.current.token = info["api_access_token"]
+                    if let token = info["api_access_token"] {
+                        User.current.nickname = nickname
+                        User.current.token = token
+
+                    }
+                } else if let info = response as? [String : Any] {
+                    if let _ = info["api_access_token"] as? NSNull {
+                        err = "Wrong credentials"
+                    }
                 }
                 
                 self.removeProgressHud()
-                completion(self.getCode(from: dataTask), nil)
+                completion(self.getCode(from: dataTask), err)
             }) { (dataTask, err) in
                 self.removeProgressHud()
                 completion(self.getCode(from: dataTask), self.getCode(from: dataTask).errorCodeDescription())
@@ -48,19 +56,28 @@ class RequestEngine: NSObject {
         }
     }
     
-    func whoami(completion: @escaping (_ profile: Profile?) -> Void) {
-        let url = urls.whoami
+    func whoami(completion: @escaping (_ profile: Profile?, _ error: String?) -> Void) {
+        addProgressHud()
         
-        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-            var profile: Profile? = nil
+        if isInternet() {
+            let url = urls.whoami
             
-            if let info = response as? [String : Any] {
-                profile = Profile(with: info)
+            manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
+                var profile: Profile? = nil
+                
+                if let info = response as? [String : Any] {
+                    profile = Profile(with: info)
+                }
+                
+                self.removeProgressHud()
+                completion(profile, nil)
+            }) { (dataTask, err) in
+                self.removeProgressHud()
+                completion(nil, self.getCode(from: dataTask).errorCodeDescription())
             }
-            
-            completion(profile)
-        }) { (dataTask, err) in
-            completion(nil)
+        } else {
+            self.removeProgressHud()
+            completion(nil, networkError)
         }
     }
     
@@ -181,7 +198,7 @@ class RequestEngine: NSObject {
                 
                 if let animeArr = response as? [String : Any] {
                     if let anim = Anime(with: animeArr, or: nil) {
-                        CoreDataStack.shared.save(anime: anim)
+//                        CoreDataStack.shared.save(anime: anim)
                         anime = anim
                     }
                 }
@@ -304,6 +321,11 @@ class RequestEngine: NSObject {
         }
     }
     
+    func isInternet() -> Bool {
+        let reachability = Reachability()!
+        return reachability.currentReachabilityStatus != Reachability.NetworkStatus.notReachable
+    }
+    
 }
 
 private extension RequestEngine {
@@ -317,11 +339,6 @@ private extension RequestEngine {
         }
         
         return manager
-    }
-    
-    func isInternet() -> Bool {
-        let reachability = Reachability()!
-        return reachability.currentReachabilityStatus != Reachability.NetworkStatus.notReachable
     }
     
     func getCode(from dataTask: URLSessionDataTask?) -> Int {

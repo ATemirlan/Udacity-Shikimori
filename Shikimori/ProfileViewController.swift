@@ -17,6 +17,7 @@ class ProfileViewController: CustomNavViewController {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var avatarView: UIImageView!
     
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var notLabel: UILabel!
     
@@ -48,7 +49,9 @@ class ProfileViewController: CustomNavViewController {
             tableView.isHidden = false
             loginButton.isHidden = true
             notLabel.isHidden = true
+            logoutButton.image = UIImage(named: "logout")
         } else {
+            logoutButton.image = UIImage()
             loginButton.isHidden = false
             notLabel.isHidden = false
             tableView.isHidden = true

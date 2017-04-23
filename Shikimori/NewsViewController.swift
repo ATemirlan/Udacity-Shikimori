@@ -58,25 +58,40 @@ class NewsViewController: CustomNavViewController {
     }
     
     func getAnimeList(with filter: String?, at page: Int) {
-        RequestEngine.shared.getAnimes(with: filter, at: page) { (animes, error) in
-            if let _ = error {
-                self.reachesEnd = true
-                Utils().showError(text: error!, at: self)
-            } else {
-                if let _ = animes, animes!.count > 0 {
-                    self.animes.append(contentsOf: animes!)
-                    
-                    if page == 1 {
-                        self.setupFlowLayout()
+        if RequestEngine.shared.isInternet() {
+            RequestEngine.shared.getAnimes(with: filter, at: page) { (animes, error) in
+                if let _ = error {
+                    self.reachesEnd = true
+                    Utils().showError(text: error!, at: self)
+                } else {
+                    if let _ = animes, animes!.count > 0 {
+                        self.animes.append(contentsOf: animes!)
+                        
+                        if page == 1 {
+                            self.setupFlowLayout()
+                        }
+                        
+                        if animes!.count < 50 {
+                            self.reachesEnd = true
+                        }
+                        
+                        self.page += 1
                     }
                     
-                    if animes!.count < 50 {
-                        self.reachesEnd = true
-                    }
-                    
-                    self.page += 1
+                    self.collectionView.reloadData()
                 }
-                
+            }
+        } else {
+            animes = [Anime]()
+            self.reachesEnd = true
+            
+            if let localAnimes = CoreDataStack.shared.getAnimes(with: false, by: nil) {
+                for localAnime in localAnimes {
+                    if let obj = Anime(with: nil, or: localAnime) {
+                        animes.append(obj)
+                    }
+                }
+                self.setupFlowLayout()
                 self.collectionView.reloadData()
             }
         }
@@ -130,11 +145,14 @@ extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecog
                         }
                     }
                 } else {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
                     RequestEngine.shared.getAnime(by: previewAnime!.id!, withProgress: false, completion: { (anim, error) in
                         if let _ = anim {
                             vc.anime = anim!
                             self.show(vc, sender: self)
                         }
+                        
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     })
                 }
             }
@@ -211,13 +229,17 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
         if animes.count > 0 {
             let anime = animes[indexPath.row]
             
-            RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
-                if let _ = anim {
-                    self.performSegue(withIdentifier: "animeDetails", sender: anim)
-                } else if let _ = error {
-                    Utils().showError(text: error!, at: self)
-                }
-            })
+            if RequestEngine.shared.isInternet() {
+                RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
+                    if let _ = anim {
+                        self.performSegue(withIdentifier: "animeDetails", sender: anim)
+                    } else if let _ = error {
+                        Utils().showError(text: error!, at: self)
+                    }
+                })
+            } else {
+                self.performSegue(withIdentifier: "animeDetails", sender: anime)
+            }
         }
     }
     
