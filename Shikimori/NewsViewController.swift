@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsViewController: CustomNavViewController {
+class NewsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -17,25 +17,20 @@ class NewsViewController: CustomNavViewController {
 
     var animes = [Anime]()
     var previewAnime: Anime?
-    var page = 1
     var isSearchMode = false
     var reachesEnd = false
-    var filter: String? = nil
+    var filter = Filter(page: 1)
     
     var type: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupFlowLayout()
     }
     
     func setupView() {
         if let _ = type {
-            view.removeGestureRecognizer(revealViewController().panGestureRecognizer())
-            
-            navigationController?.interactivePopGestureRecognizer?.delegate = nil
-            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-            
             leftButton.image = UIImage(named: "back")
             leftButton.target = self
             leftButton.action = #selector(goBack)
@@ -43,11 +38,12 @@ class NewsViewController: CustomNavViewController {
             filterButton.image = nil
             filterButton.isEnabled = false
             collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-            filter = "&mylist=\(type!)"
-            getAnimeList(with: filter, at: page)
+//            filter = Filter()
+//            filter?.type = type
+            getAnimeList(with: filter)
         } else {
             collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
-            getAnimeList(with: filter, at: page)
+            getAnimeList(with: filter)
         }
         
         setupLongGesture()
@@ -57,42 +53,13 @@ class NewsViewController: CustomNavViewController {
         self.navigationController!.popViewController(animated: true)
     }
     
-    func getAnimeList(with filter: String?, at page: Int) {
-        if RequestEngine.shared.isInternet() {
-            RequestEngine.shared.getAnimes(with: filter, at: page) { (animes, error) in
-                if let _ = error {
-                    self.reachesEnd = true
-                    Utils().showError(text: error!, at: self)
-                } else {
-                    if let _ = animes, animes!.count > 0 {
-                        self.animes.append(contentsOf: animes!)
-                        
-                        if page == 1 {
-                            self.setupFlowLayout()
-                        }
-                        
-                        if animes!.count < 50 {
-                            self.reachesEnd = true
-                        }
-                        
-                        self.page += 1
-                    }
-                    
-                    self.collectionView.reloadData()
-                }
-            }
-        } else {
-            animes = [Anime]()
-            self.reachesEnd = true
-            
-            if let localAnimes = CoreDataStack.shared.getAnimes(with: false, by: nil) {
-                for localAnime in localAnimes {
-                    if let obj = Anime(with: nil, or: localAnime) {
-                        animes.append(obj)
-                    }
-                }
-                self.setupFlowLayout()
+    func getAnimeList(with filter: Filter?) {
+        RequestEngine.shared.getAnimes(with: filter) { (animes, error) in
+            if let _ = animes {
+                self.animes = animes!
                 self.collectionView.reloadData()
+            } else {
+//                print(error)
             }
         }
     }
@@ -106,20 +73,19 @@ class NewsViewController: CustomNavViewController {
             collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
-        if scrollView.contentOffset.y > 50 {
+        if scrollView.contentOffset.y > 55 {
             collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
         }
     }
 }
 
 extension NewsViewController: FiltersDelegate {
-    
-    func filterUrlPostfix(url: String) {
-        if url != "" {
-            page = 1
-            filter = url
+    func filterChanged(filter: Filter) {
+        if filter.hasChanges() {
+            self.filter = filter
             animes = [Anime]()
-            getAnimeList(with: filter, at: page)
+            
+            getAnimeList(with: filter)
         }
     }
     
@@ -135,28 +101,7 @@ extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecog
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as? AnimeDetailsViewController {
-            if let _ = previewAnime {
-                if let previewArr = CoreDataStack.shared.getAnimes(with: true, by: previewAnime!.id!) {
-                    if let localAnime = previewArr.first {
-                        if let an = Anime(with: nil, or: localAnime) {
-                            vc.anime = an
-                            self.show(vc, sender: self)
-                        }
-                    }
-                } else {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-                    RequestEngine.shared.getAnime(by: previewAnime!.id!, withProgress: false, completion: { (anim, error) in
-                        if let _ = anim {
-                            vc.anime = anim!
-                            self.show(vc, sender: self)
-                        }
-                        
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    })
-                }
-            }
-        }
+        
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -172,16 +117,6 @@ extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecog
         let anime = animes[indexPath.row]
         previewAnime = anime
         
-        if let previewArr = CoreDataStack.shared.getAnimes(with: true, by: previewAnime!.id!) {
-            if let localAnime = previewArr.first {
-                if let an = Anime(with: nil, or: localAnime) {
-                    vc.anime = an
-                }
-            }
-        } else {
-            vc.animeId = anime.id
-        }
-        
         return vc
     }
 }
@@ -194,20 +129,7 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! AnimeCollectionViewCell
-        
-        if animes.count > 0 {
-            let anime = animes[indexPath.row]
-            cell.titleLabel.text = anime.russianName ?? anime.name
-            cell.typeLabel.text = anime.kind?.animeType ?? ""
-            cell.yearLabel.text = anime.aired_on?.year ?? ""
-            
-            if let _ = anime.imageUrl {
-                cell.imageView.setImageWith(anime.imageUrl!, placeholderImage: UIImage(named: "placeholder"))
-            } else {
-                cell.imageView.image = UIImage(named: "placeholder")
-            }   
-        }
-        
+        cell.setup(with: animes[indexPath.row])
         return cell
     }
     
@@ -217,7 +139,7 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
             
             if indexPath.row == lastElement {
                 if !isSearchMode, !reachesEnd {
-                    getAnimeList(with: filter, at: page)
+//                    getAnimeList(with: filter, at: page)
                 }
             }
         }
@@ -229,17 +151,6 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
         if animes.count > 0 {
             let anime = animes[indexPath.row]
             
-            if RequestEngine.shared.isInternet() {
-                RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
-                    if let _ = anim {
-                        self.performSegue(withIdentifier: "animeDetails", sender: anim)
-                    } else if let _ = error {
-                        Utils().showError(text: error!, at: self)
-                    }
-                })
-            } else {
-                self.performSegue(withIdentifier: "animeDetails", sender: anime)
-            }
         }
     }
     
@@ -299,8 +210,9 @@ extension NewsViewController: UISearchBarDelegate {
         if searchBar.text == "" {
             animes = [Anime]()
             isSearchMode = false
-            page = 1
-            getAnimeList(with: nil, at: page)
+            filter.page = 1
+            // TODO: Clear filter
+            getAnimeList(with: filter)
             searchBar.showsCancelButton = false
         }
     }
@@ -312,16 +224,7 @@ extension NewsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if !searchBar.text!.isCyrillic {
-            RequestEngine.shared.searchAnimes(by: searchBar.text!) { (animes, error) in
-                if let _ = error {
-                    Utils().showError(text: error!, at: self)
-                } else {
-                    if let _ = animes {
-                        self.animes = animes!
-                        self.collectionView.reloadData()
-                    }
-                }
-            }
+           
         } else {
             Utils().showError(text: "Поиск производится по английскому названию", at: self)
         }

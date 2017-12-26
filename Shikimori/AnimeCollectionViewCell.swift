@@ -21,4 +21,23 @@ class AnimeCollectionViewCell: UICollectionViewCell {
         titleContainer.backgroundColor = Constants.SystemColor.navBarColor.withAlphaComponent(0.8)
     }
     
+    func setup(with anime: Anime) {
+        titleLabel.text = anime.russianName ?? anime.name
+        typeLabel.text = anime.kind?.animeType ?? ""
+        yearLabel.text = anime.aired_on?.year ?? ""
+        
+
+        if let url = anime.imageUrl {
+            RequestEngine.shared.loadImage(from: url) { (image) in
+                if let _ = image {
+                    self.imageView.image = image!
+                } else {
+                    self.imageView.image = UIImage(named: "placeholder")
+                }
+            }
+        } else {
+            imageView.image = UIImage(named: "placeholder")
+        }
+    }
+    
 }

@@ -27,17 +27,7 @@ class AnimeDetailsViewController: AbstractViewController {
     }
     
     func getSimilarSection() {
-        if RequestEngine.shared.isInternet() {
-            RequestEngine.shared.getSimilarAnimes(from: anime!.id!) { (similars, error) in
-                if let _ = error {
-                    self.similarAnimes = [Anime]()
-                    Utils().showError(text: error!, at: self)
-                } else {
-                    self.similarAnimes = similars
-                }
-                self.tableView.reloadData()
-            }
-        }
+        
     }
     
     @IBAction func starAction(_ sender: UIBarButtonItem) {
@@ -77,15 +67,7 @@ class AnimeDetailsViewController: AbstractViewController {
         
         
         let removeAction = UIAlertAction(title: "Удлаить из списка", style: .destructive) { (action) in
-            RequestEngine.shared.removeFromList(userRateId: self.anime!.userRateId!, completion: { (success, error) in
-                if success == true {
-                    if let _ = self.anime {
-                        CoreDataStack.shared.remove(anime: self.anime!)
-                    }
-                    
-                    self.starButtonItem.image = UIImage(named: "star")
-                }
-            })
+            
         }
         
         
@@ -109,16 +91,7 @@ class AnimeDetailsViewController: AbstractViewController {
     }
     
     func performAction(on list: String, completion: @escaping (_ isAdded: Bool) -> Void) {
-        RequestEngine.shared.add(anime: anime!.id!, to: list) { (isAdded, error) in
-            if let _ = error {
-                completion(false)
-            } else {
-                if let _ = self.anime {
-                    CoreDataStack.shared.save(anime: self.anime!)
-                }
-                completion(isAdded)
-            }
-        }
+        
     }
     
     func showNotification(isAdded: Bool, alert: UIAlertController) {
@@ -146,7 +119,7 @@ extension AnimeDetailsViewController: UITableViewDataSource, UITableViewDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: "AnimeHeader") as! AnimeHeaderTableViewCell
             
             if let anime = anime {
-                cell.avatarImageView.setImageWith(anime.imageUrl!, placeholderImage: UIImage(named: "placeholder"))
+//                cell.avatarImageView.setImageWith(anime.imageUrl!, placeholderImage: UIImage(named: "placeholder"))
                 cell.originalTitleLabel.text = anime.name
                 
                 if let _ = anime.kind {
@@ -229,13 +202,13 @@ extension AnimeDetailsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func setupBar() {
-        if User.current.id == nil || RequestEngine.shared.isInternet() == false {
-            starButtonItem.image = UIImage()
-        } else {
-            if let _ = anime?.userRateId {
-                self.starButtonItem.image = UIImage(named: "star_filled")
-            }
-        }
+//        if User.current.id == nil || RequestEngine.shared.isInternet() == false {
+//            starButtonItem.image = UIImage()
+//        } else {
+//            if let _ = anime?.userRateId {
+//                self.starButtonItem.image = UIImage(named: "star_filled")
+//            }
+//        }
     }
     
     func setupTableView() {
@@ -257,7 +230,7 @@ extension AnimeDetailsViewController: UICollectionViewDataSource, UICollectionVi
         
         if let similars = similarAnimes, similars.count > 0 {
             let similar = similars[indexPath.row]
-            cell.imageView.setImageWith(similar.imageUrl!, placeholderImage: UIImage(named:"placeholder"))
+//            cell.imageView.setImageWith(similar.imageUrl!, placeholderImage: UIImage(named:"placeholder"))
         }
         
         return cell
@@ -267,15 +240,7 @@ extension AnimeDetailsViewController: UICollectionViewDataSource, UICollectionVi
         collectionView.deselectItem(at: indexPath, animated: true)
         
         if let anime = similarAnimes?[indexPath.row] {
-            RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
-                if let _ = anim {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as! AnimeDetailsViewController
-                    vc.anime = anim
-                    self.navigationController?.show(vc, sender: nil)
-                } else if let _ = error {
-                    Utils().showError(text: error!, at: self)
-                }
-            })
+            
         }
     }
 

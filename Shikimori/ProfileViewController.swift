@@ -9,7 +9,7 @@
 import UIKit
 import MXParallaxHeader
 
-class ProfileViewController: CustomNavViewController {
+class ProfileViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,12 +34,7 @@ class ProfileViewController: CustomNavViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+//        setup()
     }
     
     func setup() {
@@ -76,35 +71,12 @@ class ProfileViewController: CustomNavViewController {
         tableView.parallaxHeader.height = 120
         tableView.parallaxHeader.mode = .center
         
-        avatarView.setImageWith(profile!.avatarUrl!, placeholderImage: UIImage(named: "temp_profile"))
+//        avatarView.setImageWith(profile!.avatarUrl!, placeholderImage: UIImage(named: "temp_profile"))
         nicknameLabel.text = profile!.nickname ?? ""
     }
     
     func getAnimes(with type: String) {
-        RequestEngine.shared.getMyListAnimes(with: type) { (animes, error) in
-            if let _ = error {
-                
-            } else {
-                if let _ = animes, animes!.count > 0 {
-                    switch type {
-                    case self.list.completed:
-                        self.completedAnimes = animes!
-                    case self.list.planned:
-                        self.plannedAnimes = animes!
-                    case self.list.on_hold:
-                        self.onholdAnimes = animes!
-                    case self.list.watching:
-                        self.watchingAnimes = animes!
-                    case self.list.dropped:
-                        self.droppedAnimes = animes!
-                    default:
-                        return
-                    }
-                }
-            }
-            
-            self.tableView.reloadData()
-        }
+        
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
@@ -268,17 +240,6 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         if let list = chooseList(from: collectionView.tag) {
             let anime = list[indexPath.row]
             
-            RequestEngine.shared.getAnime(by: anime.id!, withProgress: true, completion: { (anim, error) in
-                if let _ = anim {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "AnimeDetailsViewController") as! AnimeDetailsViewController
-                    vc.anime = anim
-                    self.navigationController?.show(vc, sender: nil)
-                } else {
-                    if let _ = error {
-                        
-                    }
-                }
-            })
         }
     }
     
@@ -317,7 +278,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     func setup(cell: SimilarAnimeCollectionViewCell, at indexPath: IndexPath) {
         if let animeList = chooseList(from: indexPath.section) {
             let anime = animeList[indexPath.row]
-            cell.imageView.setImageWith(anime.imageUrl!, placeholderImage: UIImage(named:"placeholder"))
+//            cell.imageView.setImageWith(anime.imageUrl!, placeholderImage: UIImage(named:"placeholder"))
         } else {
             cell.imageView.image = UIImage(named:"placeholder")
         }

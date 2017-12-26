@@ -48,8 +48,8 @@ struct Constants {
         static let clubs = "clubs"
     }
     
-    struct Error {
-        
+    struct Messages {
+        static let unknownError = "Что-то пошло не так :("
     }
     
     struct SystemColor {

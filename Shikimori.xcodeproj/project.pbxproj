@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		141494671E86897800769C02 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141494661E86897800769C02 /* Utils.swift */; };
 		141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */; };
-		142288D51E8FABDC00AEB097 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 142288D41E8FABDC00AEB097 /* SWRevealViewController.m */; };
-		142288D71E8FB09B00AEB097 /* CustomNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142288D61E8FB09B00AEB097 /* CustomNavViewController.swift */; };
 		142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */; };
 		14368FBE1E90238100E48027 /* AXRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14368FBD1E90238100E48027 /* AXRatingView.m */; };
 		14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FBF1E90DA3400E48027 /* AbstractViewController.swift */; };
@@ -22,7 +20,6 @@
 		144D3F0F1EA33E5300D56D7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D3F0E1EA33E5300D56D7A /* User.swift */; };
 		144D3F111EA34A0900D56D7A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D3F101EA34A0900D56D7A /* Profile.swift */; };
 		144D3F131EA3541600D56D7A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D3F121EA3541600D56D7A /* ProfileViewController.swift */; };
-		144D3F151EA3593800D56D7A /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D3F141EA3593800D56D7A /* MenuTableViewController.swift */; };
 		144D3F171EA359BE00D56D7A /* ProfileMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D3F161EA359BE00D56D7A /* ProfileMenuTableViewCell.swift */; };
 		144F1FA61E867A160009260E /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F1FA51E867A160009260E /* Anime.swift */; };
 		144F1FA81E8686B60009260E /* AnimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F1FA71E8686B60009260E /* AnimeCollectionViewCell.swift */; };
@@ -37,20 +34,21 @@
 		14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6A2691EA1E4010070A4FD /* FilterViewController.swift */; };
 		14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */; };
 		14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */; };
-		14E901341EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E901321EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld */; };
-		14E901361EAB51D000511A9E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E901351EAB51D000511A9E /* CoreDataStack.swift */; };
-		14E904C41E8641860009C777 /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine.swift */; };
+		14E904C41E8641860009C777 /* RequestEngine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine2.swift */; };
 		14E904C91E8644B40009C777 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C81E8644B40009C777 /* Constants.swift */; };
 		14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F1B91F1EA1F95300D9E8FE /* Genre.swift */; };
+		911A50E61FEA14B2000A520F /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50E51FEA14B2000A520F /* RequestEngine.swift */; };
+		911A50E81FEA1698000A520F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50E71FEA1698000A520F /* ApiResponse.swift */; };
+		911A50EA1FEA1EB7000A520F /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50E91FEA1EB7000A520F /* ApiRouter.swift */; };
+		911A50EC1FEA3173000A520F /* BaseRequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50EB1FEA3173000A520F /* BaseRequestEngine.swift */; };
+		91CD07BB1FEBBCA4006778F1 /* ApplicationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD07BA1FEBBCA4006778F1 /* ApplicationRouter.swift */; };
+		91E974061FECC42400840B81 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E974051FECC42400840B81 /* Filter.swift */; };
 		CE578B7716C9CAF47A086AC4 /* Pods_Shikimori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		141494661E86897800769C02 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarAnimeCollectionViewCell.swift; sourceTree = "<group>"; };
-		142288D31E8FABDC00AEB097 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		142288D41E8FABDC00AEB097 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		142288D61E8FB09B00AEB097 /* CustomNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavViewController.swift; sourceTree = "<group>"; };
 		142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimePreviewViewController.swift; sourceTree = "<group>"; };
 		14368FBC1E90238100E48027 /* AXRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXRatingView.h; sourceTree = "<group>"; };
 		14368FBD1E90238100E48027 /* AXRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXRatingView.m; sourceTree = "<group>"; };
@@ -63,7 +61,6 @@
 		144D3F0E1EA33E5300D56D7A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		144D3F101EA34A0900D56D7A /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		144D3F121EA3541600D56D7A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		144D3F141EA3593800D56D7A /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		144D3F161EA359BE00D56D7A /* ProfileMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuTableViewCell.swift; sourceTree = "<group>"; };
 		144F1FA51E867A160009260E /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		144F1FA71E8686B60009260E /* AnimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -80,12 +77,16 @@
 		14B6A2691EA1E4010070A4FD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
-		14E901331EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShikimoriDataBase.xcdatamodel; sourceTree = "<group>"; };
-		14E901351EAB51D000511A9E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		14E904C31E8641860009C777 /* RequestEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine.swift; sourceTree = "<group>"; };
+		14E904C31E8641860009C777 /* RequestEngine2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine2.swift; sourceTree = "<group>"; };
 		14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shikimori-Bridging-Header.h"; sourceTree = "<group>"; };
 		14E904C81E8644B40009C777 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14F1B91F1EA1F95300D9E8FE /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		911A50E51FEA14B2000A520F /* RequestEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEngine.swift; sourceTree = "<group>"; };
+		911A50E71FEA1698000A520F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		911A50E91FEA1EB7000A520F /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
+		911A50EB1FEA3173000A520F /* BaseRequestEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequestEngine.swift; sourceTree = "<group>"; };
+		91CD07BA1FEBBCA4006778F1 /* ApplicationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationRouter.swift; path = ../ApplicationRouter.swift; sourceTree = "<group>"; };
+		91E974051FECC42400840B81 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shikimori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC0834D5897DEA7DE377A74A /* Pods-Shikimori.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shikimori.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori.debug.xcconfig"; sourceTree = "<group>"; };
 		F5D16124CB2AA33AEA0FAE94 /* Pods-Shikimori.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shikimori.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shikimori/Pods-Shikimori.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,15 +126,6 @@
 			name = Table;
 			sourceTree = "<group>";
 		};
-		142288D21E8FABDC00AEB097 /* SWRevealViewController */ = {
-			isa = PBXGroup;
-			children = (
-				142288D31E8FABDC00AEB097 /* SWRevealViewController.h */,
-				142288D41E8FABDC00AEB097 /* SWRevealViewController.m */,
-			);
-			path = SWRevealViewController;
-			sourceTree = "<group>";
-		};
 		14368FBB1E90238100E48027 /* AXRatingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,7 +138,6 @@
 		14368FC11E90DA3900E48027 /* Abstract controllers */ = {
 			isa = PBXGroup;
 			children = (
-				142288D61E8FB09B00AEB097 /* CustomNavViewController.swift */,
 				14368FBF1E90DA3400E48027 /* AbstractViewController.swift */,
 			);
 			name = "Abstract controllers";
@@ -159,20 +150,6 @@
 				14368FC31E90DB2400E48027 /* AnimeHeaderTableViewCell.xib */,
 			);
 			name = AnimeHeader;
-			sourceTree = "<group>";
-		};
-		144D3F0D1EA3368B00D56D7A /* Anime */ = {
-			isa = PBXGroup;
-			children = (
-				144D3F141EA3593800D56D7A /* MenuTableViewController.swift */,
-				144C65201EA37C510009649C /* LoginViewController.swift */,
-				144D3F121EA3541600D56D7A /* ProfileViewController.swift */,
-				148812C21E8640C700B580BC /* NewsViewController.swift */,
-				142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */,
-				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
-				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
-			);
-			name = Anime;
 			sourceTree = "<group>";
 		};
 		144F1FA91E8686BD0009260E /* View */ = {
@@ -206,21 +183,14 @@
 		148812AF1E86409300B580BC /* Shikimori */ = {
 			isa = PBXGroup;
 			children = (
+				911A50E41FEA14A6000A520F /* Service */,
 				14E904C51E86418C0009C777 /* Model */,
 				144F1FA91E8686BD0009260E /* View */,
 				14E904C61E8641990009C777 /* Controller */,
+				91CD07BC1FEBBCAA006778F1 /* Utils */,
 				14E904C21E86416A0009C777 /* Supporting files */,
 			);
 			path = Shikimori;
-			sourceTree = "<group>";
-		};
-		14E901371EAB51E400511A9E /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				14E901321EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld */,
-				14E901351EAB51D000511A9E /* CoreDataStack.swift */,
-			);
-			name = CoreData;
 			sourceTree = "<group>";
 		};
 		14E904C21E86416A0009C777 /* Supporting files */ = {
@@ -234,7 +204,6 @@
 				14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */,
 				1477B1781E901E9A007B4620 /* RatingView.swift */,
 				14368FBB1E90238100E48027 /* AXRatingView */,
-				142288D21E8FABDC00AEB097 /* SWRevealViewController */,
 			);
 			name = "Supporting files";
 			sourceTree = "<group>";
@@ -242,14 +211,14 @@
 		14E904C51E86418C0009C777 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				14E904C31E8641860009C777 /* RequestEngine.swift */,
+				14E904C31E8641860009C777 /* RequestEngine2.swift */,
 				144D3F0E1EA33E5300D56D7A /* User.swift */,
 				144D3F101EA34A0900D56D7A /* Profile.swift */,
 				144F1FA51E867A160009260E /* Anime.swift */,
 				14F1B91F1EA1F95300D9E8FE /* Genre.swift */,
 				14E904C81E8644B40009C777 /* Constants.swift */,
 				141494661E86897800769C02 /* Utils.swift */,
-				14E901371EAB51E400511A9E /* CoreData */,
+				91E974051FECC42400840B81 /* Filter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -258,7 +227,12 @@
 			isa = PBXGroup;
 			children = (
 				14368FC11E90DA3900E48027 /* Abstract controllers */,
-				144D3F0D1EA3368B00D56D7A /* Anime */,
+				144C65201EA37C510009649C /* LoginViewController.swift */,
+				144D3F121EA3541600D56D7A /* ProfileViewController.swift */,
+				148812C21E8640C700B580BC /* NewsViewController.swift */,
+				142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */,
+				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
+				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -270,6 +244,26 @@
 				F5D16124CB2AA33AEA0FAE94 /* Pods-Shikimori.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		911A50E41FEA14A6000A520F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				911A50EB1FEA3173000A520F /* BaseRequestEngine.swift */,
+				911A50E51FEA14B2000A520F /* RequestEngine.swift */,
+				911A50E71FEA1698000A520F /* ApiResponse.swift */,
+				911A50E91FEA1EB7000A520F /* ApiRouter.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		91CD07BC1FEBBCAA006778F1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				91CD07BA1FEBBCA4006778F1 /* ApplicationRouter.swift */,
+			);
+			name = Utils;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		A60E67AB1561761CFAF09780 /* Frameworks */ = {
@@ -310,12 +304,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Temirlan;
 				TargetAttributes = {
 					148812AC1E86409200B580BC = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = S9TF7DAU5J;
+						DevelopmentTeam = MP6RX32GWF;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -365,7 +359,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5A53C5EAC9A4416F42D2184E /* [CP] Copy Pods Resources */ = {
@@ -405,24 +399,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14E901341EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld in Sources */,
-				142288D71E8FB09B00AEB097 /* CustomNavViewController.swift in Sources */,
+				911A50E81FEA1698000A520F /* ApiResponse.swift in Sources */,
 				148812B11E86409300B580BC /* AppDelegate.swift in Sources */,
 				144D3F171EA359BE00D56D7A /* ProfileMenuTableViewCell.swift in Sources */,
 				1477B1791E901E9A007B4620 /* RatingView.swift in Sources */,
 				142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */,
 				144C65211EA37C510009649C /* LoginViewController.swift in Sources */,
 				14368FC91E90EA6500E48027 /* DescriptionTableViewCell.swift in Sources */,
-				144D3F151EA3593800D56D7A /* MenuTableViewController.swift in Sources */,
-				14E901361EAB51D000511A9E /* CoreDataStack.swift in Sources */,
+				911A50EC1FEA3173000A520F /* BaseRequestEngine.swift in Sources */,
+				91CD07BB1FEBBCA4006778F1 /* ApplicationRouter.swift in Sources */,
 				141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */,
 				14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */,
 				144F1FA61E867A160009260E /* Anime.swift in Sources */,
+				911A50E61FEA14B2000A520F /* RequestEngine.swift in Sources */,
+				91E974061FECC42400840B81 /* Filter.swift in Sources */,
 				14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */,
 				148812C31E8640C700B580BC /* NewsViewController.swift in Sources */,
 				144D3F131EA3541600D56D7A /* ProfileViewController.swift in Sources */,
 				14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */,
-				142288D51E8FABDC00AEB097 /* SWRevealViewController.m in Sources */,
 				141494671E86897800769C02 /* Utils.swift in Sources */,
 				14AA83D31EA202EA0025A277 /* RateFilterTableViewCell.swift in Sources */,
 				14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */,
@@ -432,9 +426,10 @@
 				14368FBE1E90238100E48027 /* AXRatingView.m in Sources */,
 				14368FCC1E90ED3D00E48027 /* AnimeSimilarTableViewCell.swift in Sources */,
 				14AA83D51EA207DD0025A277 /* RatingButton.swift in Sources */,
+				911A50EA1FEA1EB7000A520F /* ApiRouter.swift in Sources */,
 				144D3F0F1EA33E5300D56D7A /* User.swift in Sources */,
 				144F1FA81E8686B60009260E /* AnimeCollectionViewCell.swift in Sources */,
-				14E904C41E8641860009C777 /* RequestEngine.swift in Sources */,
+				14E904C41E8641860009C777 /* RequestEngine2.swift in Sources */,
 				14E904C91E8644B40009C777 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,7 +465,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -478,7 +475,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -501,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -520,7 +521,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -528,7 +531,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -545,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Shikimori/Shikimori-Bridging-Header.h";
@@ -560,11 +567,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S9TF7DAU5J;
+				DEVELOPMENT_TEAM = MP6RX32GWF;
 				INFOPLIST_FILE = Shikimori/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori;
+				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -576,11 +583,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S9TF7DAU5J;
+				DEVELOPMENT_TEAM = MP6RX32GWF;
 				INFOPLIST_FILE = Shikimori/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori;
+				PRODUCT_BUNDLE_IDENTIFIER = temir.Shikimori.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -608,19 +615,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		14E901321EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				14E901331EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodel */,
-			);
-			currentVersion = 14E901331EAB4FBC00511A9E /* ShikimoriDataBase.xcdatamodel */;
-			path = ShikimoriDataBase.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 148812A51E86409200B580BC /* Project object */;
 }

@@ -3,7 +3,9 @@ platform :ios, '9.0'
 target 'Shikimori' do
   use_frameworks!
 
-  pod 'AFNetworking', '~> 3.0'
+  pod 'SwiftyJSON'
+  pod 'Alamofire', '~> 4.5'
+  pod 'AlamofireImage', '~> 3.3'
   pod 'ReachabilitySwift', '~> 3'
   pod "MXParallaxHeader"
 

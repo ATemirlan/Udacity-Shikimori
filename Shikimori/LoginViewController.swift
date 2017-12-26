@@ -36,27 +36,7 @@ class LoginViewController: UIViewController {
             !placeholders.contains(loginField.text!),
             !placeholders.contains(passwordField.text!) {
             
-            RequestEngine.shared.login(nickname: loginField.text!, password: passwordField.text!, completion: { (code, error) in
-                if code == 200, error == nil {
-                    RequestEngine.shared.whoami { (profile, error) in
-                        if let _ = profile {
-                            User.current.id = "\(profile!.id!)"
-                            User.current.nickname = profile!.nickname!
-                            User.current.avatarUrl = "\(profile!.avatarUrl!)"
-                            
-                            self.dismiss(animated: true, completion: { 
-                                self.delegate?.loginCompleted(with: profile)
-                            })
-                        } else if let _ = error {
-                            Utils().showError(text: error!, at: self)
-                        }
-                    }
-                } else {
-                    if let _ = error {
-                        Utils().showError(text: error!, at: self)
-                    }
-                }
-            })
+            
         }
     }
     

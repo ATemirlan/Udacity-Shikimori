@@ -9,8 +9,9 @@
 import UIKit
 
 protocol FiltersDelegate {
-    func filterUrlPostfix(url: String)
+    func filterChanged(filter: Filter)
 }
+
 class FilterViewController: AbstractViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,10 +19,9 @@ class FilterViewController: AbstractViewController {
     var sections = ["СТАТУС", "ТИП", "СОРТИРОВАТЬ ПО", "ОЦЕНКА", "ЖАНРЫ"]
     var states = ["anons", "ongoing", "released"]
     var types = ["tv", "movie", "ova", "ona", "special", "music"]
-    var sortBy = ["ranked", "type", "popularity", "name", "status"]
+    var orders = ["ranked", "type", "popularity", "name", "status"]
     var genres = [Genre]()
-    
-    var currRate = 0
+    var currRate: Int?
     var selectedGenres = [Genre]()
     var filterParamIndexes: [String : IndexPath?] = [
         "type" : nil,
@@ -29,58 +29,49 @@ class FilterViewController: AbstractViewController {
         "order" : nil
     ]
     
+    var filter: Filter = Filter(page: 1)
+    
     var delegate: FiltersDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        RequestEngine.shared.getGenres { (genres, error) in
-            if let _ = genres {
-                self.genres = genres!.sorted(by: {
-                    return $0.russianName! < $1.russianName!
-                })
-                self.tableView.reloadData()
-            } else if let _ = error {
-                Utils().showError(text: error!, at: self)
-            }
-        }
     }
     
     @IBAction func saveFilter(_ sender: UIBarButtonItem) {
-        var finalUrl = ""
-        
-        if selectedGenres.count > 0 {
-            var genreUrl = "&genre="
-            
-            for genre in selectedGenres {
-                genreUrl += "\(genre.id!),"
-            }
-
-            finalUrl += genreUrl.substring(to: genreUrl.index(genreUrl.endIndex, offsetBy: -1))
-        }
-        
-        if let typeIndex = filterParamIndexes["type"], typeIndex != nil {
-            let type = types[typeIndex!.row]
-            finalUrl += "&type=\(type)"
-        }
-        
-        if let statusIndex = filterParamIndexes["status"], statusIndex != nil {
-            let status = states[statusIndex!.row]
-            finalUrl += "&status=\(status)"
-        }
-        
-        if let orderIndex = filterParamIndexes["order"], orderIndex != nil {
-            let order = sortBy[orderIndex!.row]
-            finalUrl += "&order=\(order)"
-        }
-        
-        if currRate != 0 {
-            finalUrl += "&score=\(currRate)"
-        }
+        filter.genres = selectedGenres
+        filter.type = getValue(from: "type")
+        filter.status = getValue(from: "status")
+        filter.order = getValue(from: "order")
+        filter.score = currRate
 
         Utils().popViewControllerAnimated(navController: navigationController!, completion: { 
-            self.delegate?.filterUrlPostfix(url: finalUrl)
+            self.delegate?.filterChanged(filter: self.filter)
         })
+    }
+    
+    func getValue(from key: String) -> String? {
+        guard let index = getFilterIndex(from: key) else {
+            return nil
+        }
+        
+        switch key {
+        case "type":
+            return types[index]
+        case "status":
+            return states[index]
+        case "order":
+            return orders[index]
+        default:
+            return nil
+        }
+    }
+    
+    func getFilterIndex(from key: String) -> Int? {
+        if let index = filterParamIndexes[key], index != nil {
+            return index?.row
+        }
 
+        return nil
     }
     
 }
@@ -97,7 +88,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         } else if section == 1 {
             return types.count
         } else if section == 2 {
-            return sortBy.count
+            return orders.count
         } else if section == 3 {
             return 1
         } else if section == 4 {
@@ -123,7 +114,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.section == 1 {
                 cell?.textLabel?.text = types[indexPath.row].animeType
             } else if indexPath.section == 2 {
-                cell?.textLabel?.text = sortBy[indexPath.row].orderBy
+                cell?.textLabel?.text = orders[indexPath.row].orderBy
             } else if indexPath.section == 4 {
                 let genre = genres[indexPath.row]
                 cell?.textLabel?.text = genre.russianName
