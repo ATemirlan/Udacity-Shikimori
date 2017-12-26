@@ -57,4 +57,11 @@ struct ApiRouter {
         var failureCodes = [422]
     }
     
+    struct Genres: EndPoint {
+        var url: String = "genres"
+        var method: HTTPMethod = .get
+        var successCodes: CountableClosedRange<Int> = 200...299
+        var failureCodes = [422]
+    }
+    
 }

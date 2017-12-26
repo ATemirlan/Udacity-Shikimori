@@ -59,6 +59,7 @@ class NewsViewController: UIViewController {
                 self.animes = animes!
                 self.collectionView.reloadData()
             } else {
+                // TODO: Create Alert class to show messages and errors
 //                print(error)
             }
         }
@@ -73,7 +74,7 @@ class NewsViewController: UIViewController {
             collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
-        if scrollView.contentOffset.y > 55 {
+        if scrollView.contentOffset.y > 50 {
             collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
         }
     }
@@ -100,7 +101,6 @@ extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecog
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        
         
     }
     

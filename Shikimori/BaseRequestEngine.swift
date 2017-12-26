@@ -26,7 +26,7 @@ class BaseRequestEngine {
         return response
     }
     
-    open func apiRequest(route: EndPoint, replacingParams: [String : String] = [:], urlParams: [String : String?] = [:], params: [String : Any]?, completion: @escaping (_ response: ApiResponse) -> Void) {
+    open func apiRequest(route: EndPoint, replacingParams: [String : String] = [:], urlParams: [String : String?] = [:], params: [String : Any]? = nil, completion: @escaping (_ response: ApiResponse) -> Void) {
         let convertedUrl = ApiRouter.base(route.url, replacingParams: replacingParams, urlParams: urlParams)
         
         request(convertedUrl, method: route.method, parameters: params, headers: nil).response { (response) in

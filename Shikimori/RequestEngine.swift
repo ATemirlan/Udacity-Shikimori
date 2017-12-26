@@ -24,14 +24,14 @@ class RequestEngine: BaseRequestEngine {
         apiRequest(route: ApiRouter.Login(), params: params) { (response) in
             if response.result, let json = response.json {
                 User.current.nickname = nickname
-                User.current.token = json["api_access_token"] as? String
+                User.current.token = json["api_access_token"].stringValue
             }
             
             completion(response.error)
-        }
+        } 
     }
 
-    func getAnimes(with filter: Filter?, completion: @escaping (_ result: [Anime]?, _ error: String?) -> Void) {
+    func getAnimes(with filter: Filter?, completion: @escaping (_ animes: [Anime]?, _ error: String?) -> Void) {
         apiRequest(route: ApiRouter.AnimeList(), urlParams: filter?.toDict() ?? [:], params: nil) { (response) in
             guard response.result, let json = response.json else {
                 completion(nil, response.error)
@@ -48,18 +48,23 @@ class RequestEngine: BaseRequestEngine {
         }
     }
     
-//    func getAnime(by id: Int, withProgress: Bool, completion: @escaping (_ result: Anime?, _ error: String?) -> Void) {
-//        let url = urls.anime.replacingOccurrences(of: "{id}", with: String(id))
-//
-//        manager().get(url, parameters: nil, progress: nil, success: { (dataTask, response) in
-//            var anime: Anime? = nil
-//
-//            self.removeProgressHud()
-//            completion(anime, nil)
-//        }) { (dataTask, err) in
-//            self.removeProgressHud()
-//            completion(nil, self.getCode(from: dataTask).errorCodeDescription())
-//        }
-//    }
+    func getGenres(isAnime: Bool, completion: @escaping (_ genres: [Genre]?) -> Void) {
+        apiRequest(route: ApiRouter.Genres()) { (response) in
+            guard response.result, let json = response.json else {
+                completion(nil)
+                return
+            }
+            
+            var genres = [Genre]()
+            
+            for genreJSON in json.arrayValue {
+                if let genre = Genre(with: genreJSON) {
+                    genres.append(genre)
+                }
+            }
+            
+            completion(genres.filter { $0.kind == (isAnime ? "anime" : "manga") })
+        }
+    }
     
 }

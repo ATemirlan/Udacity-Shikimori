@@ -8,34 +8,26 @@
 
 import SwiftyJSON
 
-struct Genre {
+class Genre: NSObject {
     
     var id: Int
-    var kind: String?
+    var kind: String
     var name: String?
     var russianName: String?
     
-//    init?(with genreInfo: [String : Any]){
-//        if let kind = genreInfo["kind"] as? String, kind == "anime" {
-//            if let id = genreInfo["id"] as? Int {
-//                self.id = id
-//            }
-//
-//            if let name = genreInfo["name"] as? String {
-//                self.name = name
-//            }
-//
-//            if let russian = genreInfo["russian"] as? String {
-//                if russian == "Хентай" || russian == "Яой" || russian == "Юри" {
-//                    return nil
-//                }
-//                self.russianName = russian
-//            }
-//        } else {
-//            return nil
-//        }
-//
-//        super.init()
-//    }
+    private var wrongGenres = ["Хентай", "Яой", "Юри"]
+    
+    init?(with json: JSON) {
+        self.id = json["id"].intValue
+        self.kind = json["kind"].stringValue
+        self.name = json["name"].stringValue
+        self.russianName = json["russian"].stringValue
+        
+        if wrongGenres.contains(self.russianName!) {
+            return nil
+        }
+
+        super.init()
+    }
     
 }

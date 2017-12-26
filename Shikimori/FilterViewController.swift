@@ -35,6 +35,16 @@ class FilterViewController: AbstractViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+    }
+    
+    func fetchData() {
+        RequestEngine.shared.getGenres(isAnime: true) { (genres) in
+            if let _ = genres {
+                self.genres = genres!
+                self.tableView.reloadData()
+            }
+        }
     }
     
     @IBAction func saveFilter(_ sender: UIBarButtonItem) {
@@ -43,7 +53,8 @@ class FilterViewController: AbstractViewController {
         filter.status = getValue(from: "status")
         filter.order = getValue(from: "order")
         filter.score = currRate
-
+        filter.genres = selectedGenres
+        
         Utils().popViewControllerAnimated(navController: navigationController!, completion: { 
             self.delegate?.filterChanged(filter: self.filter)
         })

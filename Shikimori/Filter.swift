@@ -34,6 +34,13 @@ struct Filter {
     }
     
     func toDict() -> [String : String?] {
+        var genresParams: String = ""
+        
+        if let genres = genres {
+            let _ = genres.map { genresParams += String($0.id) + "," }
+            genresParams = String(genresParams[..<genresParams.index(before: genresParams.endIndex)])
+        }
+        
         return [
             "censored" : "true",
             "limit" : "5",
@@ -42,7 +49,7 @@ struct Filter {
             "status" : status,
             "type" : type,
             "order" : order,
-//            "genres" : genres,
+            "genre" : genresParams == "" ? nil : genresParams,
             "score" : score != nil ? String(score!) : nil
         ]
     }
