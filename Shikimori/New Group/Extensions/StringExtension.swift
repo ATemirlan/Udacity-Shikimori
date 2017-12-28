@@ -1,81 +1,12 @@
 //
-//  Utils.swift
+//  StringExtension.swift
 //  Shikimori
 //
-//  Created by Temirlan on 25.03.17.
+//  Created by Темирлан Алпысбаев on 12/28/17.
 //  Copyright © 2017 Temirlan. All rights reserved.
 //
 
-import UIKit
-
-class Utils: NSObject {
-    
-    func popViewControllerAnimated(navController: UINavigationController, completion: @escaping () -> Void) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock(completion)
-        navController.popViewController(animated: true)
-        CATransaction.commit()
-    }
-    
-    func showError(text: String, at vc: UIViewController) {
-        let controller = UIAlertController(title: "Ошибка", message: text, preferredStyle: .alert)
-        controller.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        vc.present(controller, animated: true, completion: nil)
-    }
-    
-}
-
-extension Date {
-
-    var year: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
-        return dateFormatter.string(from: self as Date)
-    }
-    
-}
-
-extension Int {
-    
-    func errorCodeDescription() -> String {
-        if (300...399).contains(self) {
-            return "Redirect error occured"
-        } else if (400...499).contains(self) {
-            switch self {
-            case 400:
-                return "Bad request"
-            case 401:
-                return "Unauthorized"
-            case 403:
-                return "Forbidden"
-            case 404:
-                return "Not found"
-            case 405:
-                return "Mthod not allowed"
-            case 406:
-                return "Not acceptable"
-            default:
-                return "Client error occured"
-            }
-        } else if (500...599).contains(self) {
-            switch self {
-            case 500:
-                return "Internal server error"
-            case 502:
-                return "Bad gateway"
-            case 503:
-                return "Service unavailable"
-            case 504:
-                return "Gateway time-out"
-            default:
-                return "Server error"
-            }
-        }
-        
-        return "Unknown error occured"
-    }
-    
-}
+import Foundation
 
 extension String {
     
@@ -97,7 +28,7 @@ extension String {
         let upper = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯ"
         let lower = "абвгдежзийклмнопрстуфхцчшщьюя"
         
-        for c in self.characters.map({ String($0) }) {
+        for c in self.map({ String($0) }) {
             if !upper.contains(c) && !lower.contains(c) {
                 return false
             }

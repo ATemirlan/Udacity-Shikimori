@@ -11,6 +11,7 @@ import UIKit
 protocol LoginDelegate {
     func loginCompleted(with profile: Profile?)
 }
+
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginField: UITextField!
@@ -31,12 +32,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: UIButton) {
-        if loginField.text!.characters.count > 0,
-            passwordField.text!.characters.count > 0,
+        if loginField.text!.count > 0,
+            passwordField.text!.count > 0,
             !placeholders.contains(loginField.text!),
             !placeholders.contains(passwordField.text!) {
-            
-            
+            // TODO: Login method
         }
     }
     

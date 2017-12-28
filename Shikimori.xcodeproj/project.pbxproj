@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		141494671E86897800769C02 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141494661E86897800769C02 /* Utils.swift */; };
 		141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */; };
-		142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */; };
 		14368FBE1E90238100E48027 /* AXRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14368FBD1E90238100E48027 /* AXRatingView.m */; };
 		14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FBF1E90DA3400E48027 /* AbstractViewController.swift */; };
 		14368FC41E90DB2400E48027 /* AnimeHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14368FC21E90DB2400E48027 /* AnimeHeaderTableViewCell.swift */; };
@@ -34,13 +33,16 @@
 		14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6A2691EA1E4010070A4FD /* FilterViewController.swift */; };
 		14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */; };
 		14D76EDE1E901F5600C03D3B /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */; };
-		14E904C41E8641860009C777 /* RequestEngine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C31E8641860009C777 /* RequestEngine2.swift */; };
 		14E904C91E8644B40009C777 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E904C81E8644B40009C777 /* Constants.swift */; };
 		14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F1B91F1EA1F95300D9E8FE /* Genre.swift */; };
 		911A50E61FEA14B2000A520F /* RequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50E51FEA14B2000A520F /* RequestEngine.swift */; };
 		911A50E81FEA1698000A520F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50E71FEA1698000A520F /* ApiResponse.swift */; };
 		911A50EA1FEA1EB7000A520F /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50E91FEA1EB7000A520F /* ApiRouter.swift */; };
 		911A50EC1FEA3173000A520F /* BaseRequestEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911A50EB1FEA3173000A520F /* BaseRequestEngine.swift */; };
+		91AF4A3F1FF4A3B50063296F /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AF4A3E1FF4A3B50063296F /* StringExtension.swift */; };
+		91AF4A411FF4A3D60063296F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AF4A401FF4A3D60063296F /* IntExtension.swift */; };
+		91AF4A431FF4A4000063296F /* TopObjectsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AF4A421FF4A4000063296F /* TopObjectsExtension.swift */; };
+		91AF4A451FF4A4150063296F /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AF4A441FF4A4150063296F /* DateExtension.swift */; };
 		91CD07BB1FEBBCA4006778F1 /* ApplicationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD07BA1FEBBCA4006778F1 /* ApplicationRouter.swift */; };
 		91E974061FECC42400840B81 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E974051FECC42400840B81 /* Filter.swift */; };
 		CE578B7716C9CAF47A086AC4 /* Pods_Shikimori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */; };
@@ -49,7 +51,6 @@
 /* Begin PBXFileReference section */
 		141494661E86897800769C02 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		141B50451E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarAnimeCollectionViewCell.swift; sourceTree = "<group>"; };
-		142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimePreviewViewController.swift; sourceTree = "<group>"; };
 		14368FBC1E90238100E48027 /* AXRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXRatingView.h; sourceTree = "<group>"; };
 		14368FBD1E90238100E48027 /* AXRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXRatingView.m; sourceTree = "<group>"; };
 		14368FBF1E90DA3400E48027 /* AbstractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		14B6A2691EA1E4010070A4FD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		14BB1D8E1E9BDB530018C122 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
-		14E904C31E8641860009C777 /* RequestEngine2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEngine2.swift; sourceTree = "<group>"; };
 		14E904C71E86428C0009C777 /* Shikimori-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shikimori-Bridging-Header.h"; sourceTree = "<group>"; };
 		14E904C81E8644B40009C777 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14F1B91F1EA1F95300D9E8FE /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
@@ -85,6 +85,10 @@
 		911A50E71FEA1698000A520F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		911A50E91FEA1EB7000A520F /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		911A50EB1FEA3173000A520F /* BaseRequestEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequestEngine.swift; sourceTree = "<group>"; };
+		91AF4A3E1FF4A3B50063296F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		91AF4A401FF4A3D60063296F /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		91AF4A421FF4A4000063296F /* TopObjectsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopObjectsExtension.swift; sourceTree = "<group>"; };
+		91AF4A441FF4A4150063296F /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		91CD07BA1FEBBCA4006778F1 /* ApplicationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationRouter.swift; path = ../ApplicationRouter.swift; sourceTree = "<group>"; };
 		91E974051FECC42400840B81 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		93F390D188C47B09CAC64936 /* Pods_Shikimori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shikimori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,13 +215,10 @@
 		14E904C51E86418C0009C777 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				14E904C31E8641860009C777 /* RequestEngine2.swift */,
 				144D3F0E1EA33E5300D56D7A /* User.swift */,
 				144D3F101EA34A0900D56D7A /* Profile.swift */,
 				144F1FA51E867A160009260E /* Anime.swift */,
 				14F1B91F1EA1F95300D9E8FE /* Genre.swift */,
-				14E904C81E8644B40009C777 /* Constants.swift */,
-				141494661E86897800769C02 /* Utils.swift */,
 				91E974051FECC42400840B81 /* Filter.swift */,
 			);
 			name = Model;
@@ -230,7 +231,6 @@
 				144C65201EA37C510009649C /* LoginViewController.swift */,
 				144D3F121EA3541600D56D7A /* ProfileViewController.swift */,
 				148812C21E8640C700B580BC /* NewsViewController.swift */,
-				142C02301E8FD215000390F9 /* AnimePreviewViewController.swift */,
 				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
 				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
 			);
@@ -257,10 +257,24 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
+		91AF4A461FF4A4210063296F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				91AF4A3E1FF4A3B50063296F /* StringExtension.swift */,
+				91AF4A401FF4A3D60063296F /* IntExtension.swift */,
+				91AF4A421FF4A4000063296F /* TopObjectsExtension.swift */,
+				91AF4A441FF4A4150063296F /* DateExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		91CD07BC1FEBBCAA006778F1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				91AF4A461FF4A4210063296F /* Extensions */,
 				91CD07BA1FEBBCA4006778F1 /* ApplicationRouter.swift */,
+				141494661E86897800769C02 /* Utils.swift */,
+				14E904C81E8644B40009C777 /* Constants.swift */,
 			);
 			name = Utils;
 			path = "New Group";
@@ -359,7 +373,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5A53C5EAC9A4416F42D2184E /* [CP] Copy Pods Resources */ = {
@@ -400,16 +414,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				911A50E81FEA1698000A520F /* ApiResponse.swift in Sources */,
+				91AF4A451FF4A4150063296F /* DateExtension.swift in Sources */,
 				148812B11E86409300B580BC /* AppDelegate.swift in Sources */,
 				144D3F171EA359BE00D56D7A /* ProfileMenuTableViewCell.swift in Sources */,
 				1477B1791E901E9A007B4620 /* RatingView.swift in Sources */,
-				142C02311E8FD215000390F9 /* AnimePreviewViewController.swift in Sources */,
+				91AF4A3F1FF4A3B50063296F /* StringExtension.swift in Sources */,
+				91AF4A411FF4A3D60063296F /* IntExtension.swift in Sources */,
 				144C65211EA37C510009649C /* LoginViewController.swift in Sources */,
 				14368FC91E90EA6500E48027 /* DescriptionTableViewCell.swift in Sources */,
 				911A50EC1FEA3173000A520F /* BaseRequestEngine.swift in Sources */,
 				91CD07BB1FEBBCA4006778F1 /* ApplicationRouter.swift in Sources */,
 				141B50461E98CBC600CCB346 /* SimilarAnimeCollectionViewCell.swift in Sources */,
 				14F1B9201EA1F95400D9E8FE /* Genre.swift in Sources */,
+				91AF4A431FF4A4000063296F /* TopObjectsExtension.swift in Sources */,
 				144F1FA61E867A160009260E /* Anime.swift in Sources */,
 				911A50E61FEA14B2000A520F /* RequestEngine.swift in Sources */,
 				91E974061FECC42400840B81 /* Filter.swift in Sources */,
@@ -429,7 +446,6 @@
 				911A50EA1FEA1EB7000A520F /* ApiRouter.swift in Sources */,
 				144D3F0F1EA33E5300D56D7A /* User.swift in Sources */,
 				144F1FA81E8686B60009260E /* AnimeCollectionViewCell.swift in Sources */,
-				14E904C41E8641860009C777 /* RequestEngine2.swift in Sources */,
 				14E904C91E8644B40009C777 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

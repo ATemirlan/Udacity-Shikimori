@@ -11,12 +11,13 @@ import Foundation
 struct Filter {
     
     var page: Int
+    var limit = 10
     
     var section: String?
     var status: String?
     var type: String?
     var order: String?
-    var genres: [Genre]?
+    var genres = [Genre]()
     var score: Int?
     
     init(page: Int) {
@@ -25,7 +26,7 @@ struct Filter {
     
     func hasChanges() -> Bool {
         if (section != nil || status != nil || type != nil || order != nil ||
-        (genres != nil && genres!.count > 0) ||
+        (genres.count > 0) ||
         (score != nil && score! > 0)) {
             return true
         }
@@ -36,14 +37,14 @@ struct Filter {
     func toDict() -> [String : String?] {
         var genresParams: String = ""
         
-        if let genres = genres {
+        if genres.count > 0 {
             let _ = genres.map { genresParams += String($0.id) + "," }
-            genresParams = String(genresParams[..<genresParams.index(before: genresParams.endIndex)])
+            genresParams = String(genresParams.prefix(genresParams.count - 1))
         }
         
         return [
             "censored" : "true",
-            "limit" : "5",
+            "limit" : String(limit),
             "page" : String(page),
             "section" : section,
             "status" : status,

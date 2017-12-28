@@ -21,20 +21,22 @@ class FilterViewController: AbstractViewController {
     var types = ["tv", "movie", "ova", "ona", "special", "music"]
     var orders = ["ranked", "type", "popularity", "name", "status"]
     var genres = [Genre]()
+    var sectionCounts: [Int]!
     var currRate: Int?
-    var selectedGenres = [Genre]()
+    
     var filterParamIndexes: [String : IndexPath?] = [
         "type" : nil,
         "status" : nil,
         "order" : nil
     ]
     
-    var filter: Filter = Filter(page: 1)
+    var filter: Filter!
     
     var delegate: FiltersDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sectionCounts = [states.count, types.count, orders.count, 1, genres.count]
         fetchData()
     }
     
@@ -42,18 +44,17 @@ class FilterViewController: AbstractViewController {
         RequestEngine.shared.getGenres(isAnime: true) { (genres) in
             if let _ = genres {
                 self.genres = genres!
+                self.sectionCounts[4] = genres!.count
                 self.tableView.reloadData()
             }
         }
     }
     
     @IBAction func saveFilter(_ sender: UIBarButtonItem) {
-        filter.genres = selectedGenres
         filter.type = getValue(from: "type")
         filter.status = getValue(from: "status")
         filter.order = getValue(from: "order")
         filter.score = currRate
-        filter.genres = selectedGenres
         
         Utils().popViewControllerAnimated(navController: navigationController!, completion: { 
             self.delegate?.filterChanged(filter: self.filter)
@@ -94,25 +95,18 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return states.count
-        } else if section == 1 {
-            return types.count
-        } else if section == 2 {
-            return orders.count
-        } else if section == 3 {
-            return 1
-        } else if section == 4 {
-            return genres.count
-        }
-        
-        return 0
+        return sectionCounts[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "rate_cell") as! RateFilterTableViewCell
             cell.delegate = self
+            
+            if let score = filter.score, let b = (cell.rates.filter { $0.tag == score }).first {
+                cell.setSelected(but: b)
+            }
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
@@ -129,7 +123,11 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.section == 4 {
                 let genre = genres[indexPath.row]
                 cell?.textLabel?.text = genre.russianName
-                cell?.accessoryType = selectedGenres.contains(genre) ? .checkmark : .none
+                cell?.accessoryType = .none
+                
+                for g in filter.genres {
+                    if g.id == genre.id { cell?.accessoryType = .checkmark }
+                }
             }
             
             return cell!
@@ -149,7 +147,6 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.section == 0 {
             filterParamIndexes["status"] = filterContains(index: indexPath) ? nil : indexPath
         } else if indexPath.section == 1 {
@@ -158,12 +155,16 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
             filterParamIndexes["order"] = filterContains(index: indexPath) ? nil : indexPath
         } else if indexPath.section == 4 {
             let genre = genres[indexPath.row]
+            var shouldAppend = true
             
-            if selectedGenres.contains(genre) {
-                selectedGenres.remove(at: selectedGenres.index(of: genre)!)
-            } else {
-                selectedGenres.append(genre)
+            for g in filter.genres {
+                if g.id == genre.id {
+                    filter.genres.remove(at: filter.genres.index(of: g)!)
+                    shouldAppend = false
+                }
             }
+            
+            if shouldAppend { filter.genres.append(genre) }
         }
         
         tableView.reloadData()

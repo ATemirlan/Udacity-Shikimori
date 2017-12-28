@@ -13,10 +13,8 @@ class NewsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var filterButton: UIBarButtonItem!
-    @IBOutlet weak var leftButton: UIBarButtonItem!
 
     var animes = [Anime]()
-    var previewAnime: Anime?
     var isSearchMode = false
     var reachesEnd = false
     var filter = Filter(page: 1)
@@ -31,22 +29,13 @@ class NewsViewController: UIViewController {
     
     func setupView() {
         if let _ = type {
-            leftButton.image = UIImage(named: "back")
-            leftButton.target = self
-            leftButton.action = #selector(goBack)
-            
             filterButton.image = nil
-            filterButton.isEnabled = false
             collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-//            filter = Filter()
-//            filter?.type = type
             getAnimeList(with: filter)
         } else {
             collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
             getAnimeList(with: filter)
         }
-        
-        setupLongGesture()
     }
     
     func goBack() {
@@ -55,10 +44,16 @@ class NewsViewController: UIViewController {
     
     func getAnimeList(with filter: Filter?) {
         RequestEngine.shared.getAnimes(with: filter) { (animes, error) in
-            if let _ = animes {
-                self.animes = animes!
+            if let animes = animes {
+                self.animes.append(contentsOf: animes)
                 self.collectionView.reloadData()
+                self.filter.page += 1
+                
+                if animes.count < self.filter.limit {
+                    self.reachesEnd = true
+                }
             } else {
+                self.reachesEnd = true
                 // TODO: Create Alert class to show messages and errors
 //                print(error)
             }
@@ -66,7 +61,7 @@ class NewsViewController: UIViewController {
     }
     
     @IBAction func filter(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "filterSegue", sender: nil)
+        performSegue(withIdentifier: FilterViewController.segueID, sender: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -81,44 +76,16 @@ class NewsViewController: UIViewController {
 }
 
 extension NewsViewController: FiltersDelegate {
+    
     func filterChanged(filter: Filter) {
         if filter.hasChanges() {
             self.filter = filter
             animes = [Anime]()
-            
+            collectionView.reloadData()
             getAnimeList(with: filter)
         }
     }
     
-}
-
-extension NewsViewController: UIViewControllerPreviewingDelegate, UIGestureRecognizerDelegate {
-    
-    func setupLongGesture() {
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: view)
-        }
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        guard let indexPath = collectionView.indexPathForItem(at: self.view.convert(location, to: collectionView)) else {
-            return nil
-        }
-        
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "AnimePreviewViewController") as? AnimePreviewViewController else {
-            return nil
-        }
-        
-        let anime = animes[indexPath.row]
-        previewAnime = anime
-        
-        return vc
-    }
 }
 
 extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -139,7 +106,7 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
             
             if indexPath.row == lastElement {
                 if !isSearchMode, !reachesEnd {
-//                    getAnimeList(with: filter, at: page)
+                    getAnimeList(with: filter)
                 }
             }
         }
@@ -149,7 +116,7 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
         collectionView.deselectItem(at: indexPath, animated: true)
         
         if animes.count > 0 {
-            let anime = animes[indexPath.row]
+//            let anime = animes[indexPath.row]
             
         }
     }
@@ -175,15 +142,13 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showPreview" {
-            let vc = segue.destination as! AnimePreviewViewController
-            vc.anime = sender as? Anime
-        } else if segue.identifier == "animeDetails" {
+        if segue.identifier == AnimeDetailsViewController.segueID {
             let vc = segue.destination as! AnimeDetailsViewController
             vc.anime = sender as? Anime
-        } else if segue.identifier == "filterSegue" {
+        } else if segue.identifier == FilterViewController.segueID {
             let vc = segue.destination as! FilterViewController
             vc.delegate = self
+            vc.filter = filter.hasChanges() ? filter : Filter(page: 1)
         }
     }
     

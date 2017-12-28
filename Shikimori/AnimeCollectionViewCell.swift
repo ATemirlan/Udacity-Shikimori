@@ -26,7 +26,8 @@ class AnimeCollectionViewCell: UICollectionViewCell {
         typeLabel.text = anime.kind?.animeType ?? ""
         yearLabel.text = anime.aired_on?.year ?? ""
         
-
+        self.imageView.image = UIImage(named: "placeholder")
+        
         if let url = anime.imageUrl {
             RequestEngine.shared.loadImage(from: url) { (image) in
                 if let _ = image {
