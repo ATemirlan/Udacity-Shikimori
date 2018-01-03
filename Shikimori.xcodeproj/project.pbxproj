@@ -27,7 +27,7 @@
 		148812B61E86409300B580BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148812B41E86409300B580BC /* Main.storyboard */; };
 		148812B81E86409300B580BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 148812B71E86409300B580BC /* Assets.xcassets */; };
 		148812BB1E86409300B580BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148812B91E86409300B580BC /* LaunchScreen.storyboard */; };
-		148812C31E8640C700B580BC /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148812C21E8640C700B580BC /* NewsViewController.swift */; };
+		148812C31E8640C700B580BC /* AnimeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148812C21E8640C700B580BC /* AnimeCollectionViewController.swift */; };
 		14AA83D31EA202EA0025A277 /* RateFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA83D21EA202EA0025A277 /* RateFilterTableViewCell.swift */; };
 		14AA83D51EA207DD0025A277 /* RatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA83D41EA207DD0025A277 /* RatingButton.swift */; };
 		14B6A26A1EA1E4010070A4FD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6A2691EA1E4010070A4FD /* FilterViewController.swift */; };
@@ -72,7 +72,7 @@
 		148812B71E86409300B580BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		148812BA1E86409300B580BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		148812BC1E86409300B580BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		148812C21E8640C700B580BC /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		148812C21E8640C700B580BC /* AnimeCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeCollectionViewController.swift; sourceTree = "<group>"; };
 		14AA83D21EA202EA0025A277 /* RateFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateFilterTableViewCell.swift; sourceTree = "<group>"; };
 		14AA83D41EA207DD0025A277 /* RatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingButton.swift; sourceTree = "<group>"; };
 		14B6A2691EA1E4010070A4FD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -228,9 +228,9 @@
 			isa = PBXGroup;
 			children = (
 				14368FC11E90DA3900E48027 /* Abstract controllers */,
+				148812C21E8640C700B580BC /* AnimeCollectionViewController.swift */,
 				144C65201EA37C510009649C /* LoginViewController.swift */,
 				144D3F121EA3541600D56D7A /* ProfileViewController.swift */,
-				148812C21E8640C700B580BC /* NewsViewController.swift */,
 				14D76EDD1E901F5600C03D3B /* AnimeDetailsViewController.swift */,
 				14B6A2691EA1E4010070A4FD /* FilterViewController.swift */,
 			);
@@ -431,7 +431,7 @@
 				911A50E61FEA14B2000A520F /* RequestEngine.swift in Sources */,
 				91E974061FECC42400840B81 /* Filter.swift in Sources */,
 				14BB1D8F1E9BDB530018C122 /* SearchCollectionReusableView.swift in Sources */,
-				148812C31E8640C700B580BC /* NewsViewController.swift in Sources */,
+				148812C31E8640C700B580BC /* AnimeCollectionViewController.swift in Sources */,
 				144D3F131EA3541600D56D7A /* ProfileViewController.swift in Sources */,
 				14368FC01E90DA3400E48027 /* AbstractViewController.swift in Sources */,
 				141494671E86897800769C02 /* Utils.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+class AnimeCollectionViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -19,8 +19,6 @@ class NewsViewController: UIViewController {
     var reachesEnd = false
     var filter = Filter(page: 1)
     
-    var type: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -28,18 +26,8 @@ class NewsViewController: UIViewController {
     }
     
     func setupView() {
-        if let _ = type {
-            filterButton.image = nil
-            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-            getAnimeList(with: filter)
-        } else {
-            collectionView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0)
-            getAnimeList(with: filter)
-        }
-    }
-    
-    func goBack() {
-        self.navigationController!.popViewController(animated: true)
+        collectionView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        getAnimeList(with: filter)
     }
     
     func getAnimeList(with filter: Filter?) {
@@ -55,7 +43,6 @@ class NewsViewController: UIViewController {
             } else {
                 self.reachesEnd = true
                 // TODO: Create Alert class to show messages and errors
-//                print(error)
             }
         }
     }
@@ -123,8 +110,7 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader {
-            let headerView:UICollectionReusableView =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchBarView", for: indexPath)
-            
+            let headerView: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchBarView", for: indexPath)
             return headerView
         }
         
@@ -132,13 +118,7 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        var sz = CGSize(width: view.frame.size.width, height: 50.0)
-        
-        if let _ = type {
-            sz = CGSize(width: view.frame.size.width, height: CGFloat.leastNormalMagnitude)
-        }
-
-        return sz
+        return CGSize(width: view.frame.size.width, height: 50.0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -153,9 +133,9 @@ extension NewsViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func setupFlowLayout() {
-        let space: CGFloat = 8.0
+        let space: CGFloat = 4.0
         let dimensionW = (collectionView.frame.size.width - space) / 2.0
-        let dimensionH = (collectionView.frame.size.height - 2 * space) / 2.25
+        let dimensionH = dimensionW * 3.0 / 2.0
         
         flowLayout.minimumInteritemSpacing = space / 2.0
         flowLayout.minimumLineSpacing = space

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--News View Controller-->
+        <!--Anime Collection View Controller-->
         <scene sceneID="lU8-SU-Vn8">
             <objects>
-                <viewController storyboardIdentifier="MainCollectionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6hD-fx-tWO" customClass="NewsViewController" customModule="Shikimori" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnimeCollectionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6hD-fx-tWO" customClass="AnimeCollectionViewController" customModule="Shikimori" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KA9-62-dDW"/>
                         <viewControllerLayoutGuide type="bottom" id="3AK-0h-Nmu"/>
@@ -39,8 +39,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="170" height="283"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="M6C-bd-ysD">
-                                                    <rect key="frame" x="0.0" y="-37" width="170" height="320"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="249" verticalHuggingPriority="248" verticalCompressionResistancePriority="748" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="M6C-bd-ysD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="283"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-OT-UhR">
                                                     <rect key="frame" x="0.0" y="233" width="170" height="50"/>
@@ -85,12 +85,13 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="JGI-OT-UhR" firstAttribute="trailing" secondItem="M6C-bd-ysD" secondAttribute="trailing" id="1Ua-S4-3vN"/>
-                                            <constraint firstItem="M6C-bd-ysD" firstAttribute="top" relation="lessThanOrEqual" secondItem="IOv-ph-xsP" secondAttribute="top" id="2b2-6f-Oad"/>
-                                            <constraint firstAttribute="bottom" secondItem="M6C-bd-ysD" secondAttribute="bottom" id="E3U-Jm-YMa"/>
+                                            <constraint firstItem="M6C-bd-ysD" firstAttribute="top" secondItem="IOv-ph-xsP" secondAttribute="top" id="2b2-6f-Oad"/>
+                                            <constraint firstAttribute="bottom" secondItem="JGI-OT-UhR" secondAttribute="bottom" id="58O-FN-wGV"/>
+                                            <constraint firstItem="JGI-OT-UhR" firstAttribute="leading" secondItem="IOv-ph-xsP" secondAttribute="leading" id="DhS-CG-GUI"/>
                                             <constraint firstAttribute="trailing" secondItem="M6C-bd-ysD" secondAttribute="trailing" id="Z6B-J9-i2m"/>
-                                            <constraint firstItem="JGI-OT-UhR" firstAttribute="bottom" secondItem="M6C-bd-ysD" secondAttribute="bottom" id="gko-6L-2Sd"/>
-                                            <constraint firstItem="JGI-OT-UhR" firstAttribute="leading" secondItem="M6C-bd-ysD" secondAttribute="leading" id="nWW-ln-tdm"/>
+                                            <constraint firstItem="M6C-bd-ysD" firstAttribute="width" secondItem="IOv-ph-xsP" secondAttribute="width" id="fnU-tp-Ltc"/>
+                                            <constraint firstAttribute="bottom" secondItem="M6C-bd-ysD" secondAttribute="bottom" id="qfE-WI-J44"/>
+                                            <constraint firstAttribute="trailing" secondItem="JGI-OT-UhR" secondAttribute="trailing" id="tcU-1v-Woc"/>
                                             <constraint firstItem="M6C-bd-ysD" firstAttribute="leading" secondItem="IOv-ph-xsP" secondAttribute="leading" id="x37-FR-16b"/>
                                         </constraints>
                                         <connections>
